@@ -1,0 +1,221 @@
+---
+import Background from '../components/Background.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bannerImage?: string;
+  hasImages?: boolean;
+  hasMath?: boolean;
+}
+
+const { 
+  title, 
+  description, 
+  bannerImage, 
+  hasImages = false, 
+  hasMath = false 
+} = Astro.props;
+
+const siteTitle = "Your Site Title"; // Replace with your site config
+const siteUrl = Astro.site || "https://yoursite.com"; // Replace with your site URL
+const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+const ogImage = "";
+---
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="white">
+  <head>
+    <!-- CRITICAL: Anti-flash script - must be first in head -->
+    <script is:inline>
+      (function () {
+        // Get stored theme or system preference immediately
+        const getInitialTheme = () => {
+          const stored = localStorage.getItem("theme");
+          if (stored) return stored;
+
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "white";
+        };
+
+        // Set theme immediately to prevent flash
+        const theme = getInitialTheme();
+        document.documentElement.setAttribute("data-bs-theme", theme);
+      })();
+    </script>
+
+    <!-- Performance: Preload critical local fonts -->
+    <link
+      rel="preload"
+      href="/assets/fonts/libre-baskerville-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/Inter_18pt-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/Thesignature.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/PTSerif.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+
+    <!-- Core meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Choque" />
+    {description && <meta name="description" content={description} />}
+    
+    <!-- Theme color for browser UI -->
+    <meta
+      name="theme-color"
+      content="#274b75"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#151616"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <!-- Preconnect only to CDNs we still use -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+    <!-- Open Graph tags -->
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:url" content={`${siteUrl}${Astro.url.pathname}`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    {title && <meta property="og:title" content={title} />}
+    {description && <meta property="og:description" content={description} />}
+    
+    <title>{pageTitle}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/images/favicon.ico" />
+
+    <!-- Stylesheets: Async load external CSS to prevent render blocking -->
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous"
+      />
+    </noscript>
+
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <!-- Your custom styles (load normally since they're local and small) -->
+    <!-- <link href="/assets/css/styles.css" rel="stylesheet" /> -->
+    <link
+      href="/assets/css/jekyll-pygments-themes-github.css"
+      rel="stylesheet"
+    />
+
+    <!-- MathJax Configuration -->
+    {hasMath && (
+      <script is:inline>
+        MathJax = {
+          tex: {
+            inlineMath: [
+              ["$", "$"],
+              ["\\(", "\\)"],
+            ],
+          },
+          svg: {
+            fontCache: "global",
+          },
+        };
+      </script>
+    )}
+  </head>
+
+  <body id="body" class="animation-paused">
+    <a href="#main-content" class="skip-link visually-hidden-focusable">
+      Skip to main content
+    </a>
+
+    <!-- Include your background component here -->
+    <!-- In Astro, you'd import and use it like: <Background /> -->
+
+    <Background />
+
+    <main id="main-content" role="main" tabindex="-1">
+      <slot />
+    </main>
+
+    <a
+      href="#body"
+      class="back-to-top page-scroll"
+      id="btt-button"
+      aria-label="Back to top"
+    >
+      <span class="visually-hidden">Back to Top</span>
+    </a>
+
+    <!-- Scripts (loaded at end of body with defer attribute) -->
+    <script>
+        import "../scripts/scripts.js";
+    </script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    
+    {hasImages && (
+      <script
+        defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.0.9/index.min.js"
+        integrity="sha512-03Ucfdj4I8Afv+9P/c9zkF4sBBGlf68zzr/MV+ClrqVCBXWAsTEjIoGCMqxhUxv1DGivK7Bm1IQd8iC4v7X2bw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      ></script>
+    )}
+    
+    {hasMath && (
+      <script
+        defer
+        type="text/javascript"
+        id="MathJax-script"
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+      ></script>
+    )}
+  </body>
+</html>
