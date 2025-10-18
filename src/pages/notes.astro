@@ -23,12 +23,12 @@ const notesByYear = sortedNotes.reduce(
 
     return acc;
   },
-  {} as Record<string, typeof sortedNotes>
+  {} as Record<string, typeof sortedNotes>,
 );
 
 // Sort years in descending order
 const sortedYears = Object.keys(notesByYear).sort(
-  (a, b) => parseInt(b) - parseInt(a)
+  (a, b) => parseInt(b) - parseInt(a),
 );
 
 // Helper function to get icon based on category
@@ -56,13 +56,14 @@ function formatDate(date: Date): string {
 >
   <div class="container">
     <div class="row justify-content-start mb-4 ml-top-padding">
-      <div class="col-12 col-lg-3 text-start mb-5">
+      <!-- <div class="col-12 col-lg-3 text-start mb-5">
         <a href="/"><i class="ri-arrow-left-line"></i><em>Home</em></a>
-      </div>
-      <div class="heading-title col-12 col-lg-6">
-        <header class="row align-items-start">
+      </div> -->
+      <div class="heading-title col-12 col-lg-7">
+        <!-- <div class="col-12 col-lg-3 text-start mb-5"></div> -->
+        <header class="row align-items-start my-5">
           <div class="col">
-            <h1>Notes</h1>
+            <a href="/"><i class="ri-arrow-left-line"></i><em>Home</em></a>
           </div>
           <div class="col-1 text-end">
             <a class="page-scroll" href="#" id="btnSwitch">
@@ -70,7 +71,9 @@ function formatDate(date: Date): string {
             </a>
           </div>
         </header>
-        <p class="lead">Things I am independently learning and researching.</p>
+          <h1>The Garden</h1>
+
+        <p class="subtitle">Things I am independently learning and researching.</p>
         <p>
           I'm not keen for chronological feeds because they
           <a
@@ -99,7 +102,7 @@ function formatDate(date: Date): string {
                 <div class="year-heading year text-muted mb-3">{year}</div>
                 {notesByYear[year].map((note) => {
                   const noteDate = new Date(
-                    note.data.updated || note.data.date
+                    note.data.updated || note.data.date,
                   );
                   return (
                     <div class="row mb-3 mb-md-0">

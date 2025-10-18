@@ -7,21 +7,23 @@ import localBirdImage from "../images/about_2.jpeg";
 <BaseLayout>
   <div class="container">
     <div class="row justify-content-start mb-4 ml-top-padding">
-      <div class="col-12 col-lg-3 text-start mb-5">
+      <!-- <div class="col-12 col-lg-3 text-start mb-5">
         <a href="/"><i class="ri-arrow-left-line"></i><em>Home</em></a>
-      </div>
-      <div class="heading-title col-12 col-lg-6">
-        <header class="row align-items-start">
+      </div> -->
+      <div class="heading-title col-12 col-lg-7">
+        <header class="row align-items-start my-5">
           <div class="col">
-            <h1>Bio</h1>
+            <a href="/"><i class="ri-arrow-left-line"></i><em>Home</em></a>
           </div>
           <div class="col-1 text-end">
-            <a class="page-scroll" href="#" id="btnSwitch"
-              ><i class="ri-moon-line"></i></a
-            >
+            <a class="page-scroll" href="#" id="btnSwitch">
+              <i class="ri-moon-line"></i>
+            </a>
           </div>
         </header>
-        <p class="lead">
+          <h1>About</h1>
+
+        <p class="subtitle">
           I am an advocate of multidisciplinarity and collaboration.
         </p>
         <section class="mb-5">
@@ -89,7 +91,7 @@ import localBirdImage from "../images/about_2.jpeg";
           </div>
         </section>
         <section class="mb-5">
-          <h2>Professional Experience</h2>
+          <!-- <h2>Professional Experience</h2> -->
           <!-- {% assign ordered_projects = site.experiences | sort: 'date_end' |
         reverse %} {% for project in ordered_projects %} {% if project.category
         == 'professional' %}
@@ -111,7 +113,7 @@ import localBirdImage from "../images/about_2.jpeg";
         </div>
         {% endif %} {% endfor %} -->
 
-          <h2>Other Experience</h2>
+          <!-- <h2>Other Experience</h2> -->
           <!-- {% for project in ordered_projects %} {% if project.category ==
         'personal' %}
         <div class="row mb-4">
@@ -129,7 +131,7 @@ import localBirdImage from "../images/about_2.jpeg";
         </div>
         {% endif %} {% endfor %} -->
 
-          <h2>Volunteering</h2>
+          <!-- <h2>Volunteering</h2> -->
           <!-- {% for project in ordered_projects %} {% if project.category ==
         'volunteering' %}
         <div class="row mb-4">
