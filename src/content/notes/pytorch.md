@@ -1,8 +1,8 @@
 ---
 layout: notes
-title: September 2025
+title: PyTorch for Deep Learning Bootcamp
 date: 2025-09-10
-updated: 2025-09-16
+updated: 2025-10-19
 category: Now
 ---
 Ml is turning data into number and finding patterns in those patterns.

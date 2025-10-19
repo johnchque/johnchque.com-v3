@@ -117,7 +117,7 @@ html {
   width: 100%;
   height: 100%;
   margin: 0;
-  font-size: 15px;
+  font-size: 19px;
   font-family: var(--font-body);
   background-color: var(--light);
   color: var(--dark);
@@ -134,15 +134,15 @@ h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 h2 {
-  font-size: 2.1rem;
+  font-size: 1.5rem;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 h4 {
@@ -635,6 +635,10 @@ body {
 }
 
 @media (max-width: 800px) {
+  html,
+  body {
+    font-size: 15px;
+  }
   h1 {
     font-size: 2.4rem;
   }
@@ -676,15 +680,11 @@ body {
   max-width: 150%;
 } */
 
-body {
-  font-size: 1.3rem;
-}
-
 p.subtitle {
   font-style: italic;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   display: block;
   /* line-height: 1; */
 }
