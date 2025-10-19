@@ -81,7 +81,7 @@
    ========================================== */
 @font-face {
   font-family: "Signature";
-  src: url("/assets/fonts/Thesignature.woff2") format("woff2");
+  src: url("/assets/fonts/royalty_free.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -105,35 +105,11 @@
 }
 
 @font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url("/assets/fonts/Inter_18pt-Regular.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-display: block;
-  src: url("/assets/fonts/Inter_18pt-Bold.woff2") format("woff2");
-}
-
-@font-face {
   font-family: "PT Serif";
   font-style: normal;
   font-weight: 400;
   font-display: block;
   src: url("/assets/fonts/PTSerif.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "EB Garamond";
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url("/assets/fonts/EBGaramond-Regular.ttf") format("truetype");
 }
 
 body,
