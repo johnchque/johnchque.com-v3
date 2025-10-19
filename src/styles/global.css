@@ -158,7 +158,7 @@ h6 {
 }
 
 h1 {
-  font-size: 3.2rem;
+  font-size: 2.5rem;
 }
 
 h2 {
@@ -166,7 +166,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 }
 
 h4 {
@@ -708,7 +708,7 @@ p.subtitle {
   font-style: italic;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   display: block;
   /* line-height: 1; */
 }

@@ -44,14 +44,13 @@ const formattedDate = new Date(updatedDate).toLocaleDateString("en-US", {
 >
   <div class="container">
     <div class="row justify-content-start mb-4 ml-top-padding">
-      <!-- <div class="col-12 col-lg-3 text-start mb-5">
-      </div> -->
       <article class="heading-title col-12 col-lg-7">
         <header class="row align-items-start my-5">
-          <div class="col">
-                    <a href="/notes"><i class="ri-arrow-left-line"></i><em>Notes</em></a>
-
-          </div>
+          <nav class="col" aria-label="Breadcrumb">
+            <a href="/notes">
+              <i class="ri-arrow-left-line"></i><em>Notes</em>
+            </a>
+          </nav>
           <div class="col-1 text-end">
             <a class="page-scroll" href="#" id="btnSwitch">
               <i class="ri-moon-line"></i>
@@ -59,15 +58,14 @@ const formattedDate = new Date(updatedDate).toLocaleDateString("en-US", {
           </div>
         </header>
 
-        <h1>
-          {note.data.title}
-        </h1>
+        <h1>{note.data.title}</h1>
+        <p class="subtitle">{note.data.description}</p>
         <p class="text-muted">
-          Last update: {formattedDate}
+          Last tended: {formattedDate}
         </p>
-        <div class="note-content">
+        <section class="note-content">
           <Content />
-        </div>
+        </section>
 
         {
           note.data.tags && note.data.tags.length > 0 && (

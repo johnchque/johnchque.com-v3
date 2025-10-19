@@ -7,9 +7,16 @@ interface Props {
   description?: string;
   bannerImage?: string;
   hasImages?: boolean;
+  hasMath?: boolean;
 }
 
-const { title, description, bannerImage, hasImages = false } = Astro.props;
+const {
+  title,
+  description,
+  bannerImage,
+  hasImages = false,
+  hasMath = false,
+} = Astro.props;
 
 const siteTitle = "John Choque";
 const siteUrl = Astro.site?.toString() || "https://yoursite.com";
@@ -107,6 +114,16 @@ const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
       href="/assets/css/jekyll-pygments-themes-github.css"
       rel="stylesheet"
     />
+    {
+      hasMath && (
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+          integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+          crossorigin="anonymous"
+        />
+      )
+    }
   </head>
 
   <body id="body">
