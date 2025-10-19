@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Ignore all draft folders anywhere in the project
+**/drafts/
+# Obsidian files
+**/.obsidian/

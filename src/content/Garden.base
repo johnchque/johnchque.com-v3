@@ -1,0 +1,22 @@
+views:
+  - type: table
+    name: Table
+    order:
+      - title
+      - file.folder
+      - file.name
+      - date
+    sort:
+      - property: date
+        direction: DESC
+      - property: title
+        direction: ASC
+      - property: file.folder
+        direction: DESC
+    columnSize:
+      note.title: 286
+  - type: table
+    name: Now
+    filters:
+      and:
+        - category == "Now"
