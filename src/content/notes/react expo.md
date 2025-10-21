@@ -1,9 +1,9 @@
 ---
 layout: notes
-title: September 2025
+title: React Expo notes
 date: 2025-09-10
 updated: 2025-09-16
-category: Now
+category: Learning
 ---
 
 To install an older version of the sdk

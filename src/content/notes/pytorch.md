@@ -3,7 +3,7 @@ layout: notes
 title: PyTorch for Deep Learning Bootcamp
 date: 2025-09-10
 updated: 2025-10-19
-category: Now
+category: Learning
 ---
 Ml is turning data into number and finding patterns in those patterns.
 The code is focused on code.

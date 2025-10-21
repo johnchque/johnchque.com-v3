@@ -7,7 +7,7 @@ description: Notes from the @NetNinja course in YouTube.
 category: Learning
 ---
 
-https://www.youtube.com/watch?v=31ieHmcTUOk&list=PL4cUxeGkcC9hxjeEtdHFNYMtCpjNBm3h7&index=1
+<https://www.youtube.com/watch?v=31ieHmcTUOk&list=PL4cUxeGkcC9hxjeEtdHFNYMtCpjNBm3h7&index=1>
 
 An image is a blueprint for a container.
 We can distribute the images that when they are run they create containers.
@@ -241,7 +241,7 @@ Removes the container but keeps the images and volumes.
 
 .dockerignore
 
-```
+```txt
 node_modules
 ```
 

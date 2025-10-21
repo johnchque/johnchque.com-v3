@@ -7,7 +7,7 @@ description: Notes from the @NetNinja course in YouTube.
 category: Learning
 ---
 
-https://www.youtube.com/watch?v=xMCnDesBggM&list=PL4cUxeGkcC9gUxtblNUahcsg0WLxmrK_y
+<https://www.youtube.com/watch?v=xMCnDesBggM&list=PL4cUxeGkcC9gUxtblNUahcsg0WLxmrK_y>
 
 It is a query language.
 A syntax to request or mutate data. An alternative to REST API.
@@ -37,42 +37,42 @@ The query syntax will specify the data we need from the server.
 
 How to make a query:
 
-```
+```graphql
 Query [nameofquery] {
-	reviews { // entrypoint.
-		rating,
-		content,
-		id
-	}
+ reviews { // entrypoint.
+  rating,
+  content,
+  id
+ }
 }
 ```
 
 In GraphQL we need to define what fields we want to get back.
 Nest query:
 
-```
+```graphql
 Query [nameofquery] {
-	reviews { // entrypoint.
-		rating,
-		content,
-		id,
-		author {
-			name,
-			id,
-			verified,
-			reviews {
-				rating,
-				id,
-				game {
-					title
-				}
-			}
-		},
-		game {
-			title,
-			platform
-		}
-	}
+ reviews { // entrypoint.
+  rating,
+  content,
+  id,
+  author {
+   name,
+   id,
+   verified,
+   reviews {
+    rating,
+    id,
+    game {
+     title
+    }
+   }
+  },
+  game {
+   title,
+   platform
+  }
+ }
 }
 ```
 
@@ -80,7 +80,7 @@ Query [nameofquery] {
 
 Apollo server is a way to setup a graphql server.
 Follow the steps from the following link to get started.
-https://www.apollographql.com/docs/apollo-server/getting-started
+<https://www.apollographql.com/docs/apollo-server/getting-started>
 
 ```js
 import { ApolloServer } from "@apollo/server";
@@ -115,27 +115,27 @@ schema.js
 
 ```js
 export const typeDefs = `#graphql
-	// Differnet data types.
-	type Game {
-	  id: ID!,
-	  title: String!,
-	  platform: [String!]!
-	}
-	type Review {
-	  id: ID!
-	  rating: Int!
-	  content: String!
-	}
-	type Author {
-	  id: ID!
-	  name: String!
-	  verified: Boolean!
-	}
-	type Query {
-	  reviews: [Review],
-	  games: [Game],
-	  authors: [Author]
-	}
+ // Differnet data types.
+ type Game {
+   id: ID!,
+   title: String!,
+   platform: [String!]!
+ }
+ type Review {
+   id: ID!
+   rating: Int!
+   content: String!
+ }
+ type Author {
+   id: ID!
+   name: String!
+   verified: Boolean!
+ }
+ type Query {
+   reviews: [Review],
+   games: [Game],
+   authors: [Author]
+ }
 `;
 ```
 
@@ -173,9 +173,9 @@ Query matches exactly the type name.
 We are sending back the array of games.
 If users make a query, they may request it this way:
 
-```
+```graphql
 games {
-	title
+ title
 }
 ```
 
@@ -190,13 +190,13 @@ We don't have ways to handle single entries.
 
 ```js
 export const typeDefs = `#graphql
-	...
-	type Query {
-	  reviews: [Review],
-	  review(id: ID!): Review
-	  games: [Game],
-	  authors: [Author]
-	}
+ ...
+ type Query {
+   reviews: [Review],
+   review(id: ID!): Review
+   games: [Game],
+   authors: [Author]
+ }
 `;
 ```
 
@@ -208,7 +208,7 @@ const resolver = {
     Query: {
         ...
         review(_, args) {
-	        return db.reviews.find((review) => review.id === args.id)
+         return db.reviews.find((review) => review.id === args.id)
         }
     }
 }
@@ -221,7 +221,7 @@ context, to supply context values across all resolvers, such as auth.
 
 In Apollo:
 
-```json
+```graphql
 query ReviewQuery($id: ID!) {
   review(id: $id) {
     rating,
@@ -249,12 +249,12 @@ Instead, we make a property inside the resolvers object:
 ```js
 const resolvers = {
     Query: {
-	    ...
+     ...
     },
     Game: {
-	    reviews(parent) {
-		    return db.reviews.filter((r) => r.game_id === parent.id)
-	    }
+     reviews(parent) {
+      return db.reviews.filter((r) => r.game_id === parent.id)
+     }
     }
 }
 ```
@@ -276,10 +276,10 @@ In the resolvers:
 
 ```js
 Mutation: {
-	deleteGame(_, args) {
-		db.games = db.games.filter((g) => args.id !== g.id)
-		return db.games
-	}
+ deleteGame(_, args) {
+  db.games = db.games.filter((g) => args.id !== g.id)
+  return db.games
+ }
 }
 ```
 
@@ -301,12 +301,12 @@ To create game, in the resolvers:
 ```js
     Mutation: {
         addGame(_, args) {
-	        let game = {
-		        ...args.game,
-		        id: Math.floor(Math.random() * 10000).toString()
-	        }
-	        db.games.push(game)
-	        return game
+         let game = {
+          ...args.game,
+          id: Math.floor(Math.random() * 10000).toString()
+         }
+         db.games.push(game)
+         return game
         }
     }
 ```
@@ -327,16 +327,16 @@ EditGameInput type does not make the fields required. That is why we don't reuse
 In the resolvers:
 
 ```js
-    Mutation: {
-	    ...
-        updateGame(_, args) {
-	        db.games = db.games.map((g) => {
-		        if (g.id === args.id) {
-			        return {...g, ...args.edits}
-		        }
-			    return g
-	        })
-		    return db.games.find((g) => g.id === args.id)
+Mutation: {
+ ...
+    updateGame(_, args) {
+        db.games = db.games.map((g) => {
+        if (g.id === args.id) {
+           return {...g, ...args.edits}
+          }
+       return g
+         })
+      return db.games.find((g) => g.id === args.id)
         }
     }
 ```

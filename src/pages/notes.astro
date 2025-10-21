@@ -3,7 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 // Get all notes and sort by updated date (most recent first)
-const allNotes = await getCollection("notes");
+const notes = await getCollection("notes");
+const worldNotes = await getCollection("world");
+
+const allNotes = [...notes, ...worldNotes];
+
 const sortedNotes = allNotes.sort((a, b) => {
   const dateA = new Date(a.data.updated || a.data.date);
   const dateB = new Date(b.data.updated || b.data.date);
@@ -40,6 +44,7 @@ function getCategoryIcon(category: string): string {
     Evergreen: "ri-tree-fill",
     Now: "ri-time-line",
     Reflections: "ri-lightbulb-line",
+    World: "ri-earth-line"
   };
   return icons[category] || "ri-leaf-fill";
 }
@@ -108,7 +113,7 @@ function formatDate(date: Date): string {
                     <div class="row mb-3 mb-md-0">
                       <div class="col">
                         <a href={`/${note.id}`}>
-                          <i class={getCategoryIcon(note.data.category)} />{" "}
+                          <i class={getCategoryIcon(note.data.category)} />
                           {note.data.title}
                         </a>
                       </div>
