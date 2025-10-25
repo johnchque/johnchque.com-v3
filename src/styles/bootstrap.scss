@@ -1,0 +1,34 @@
+// 1. Include functions first (always required)
+@import "bootstrap/scss/functions";
+
+// 2. Override default variables (optional - customize colors, spacing, etc.)
+$primary: #274b75; // Your theme color from meta tag
+$enable-rounded: true;
+$enable-shadows: false;
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark"; // For dark mode support
+
+// 4. Include required mixins
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// 5. Root and Reboot (base styles)
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+
+// 6. Only include the components you need
+@import "bootstrap/scss/type"; // Typography
+@import "bootstrap/scss/containers"; // .container-lg
+@import "bootstrap/scss/grid"; // .row, .col-*
+
+// 7. Utilities
+@import "bootstrap/scss/utilities/api"; // Generates spacing utilities (mb-5, my-5, etc.)
+
+// 8. Optional: Add specific utilities you need
+// Already included via utilities/api above:
+// - Spacing (margin, padding)
+// - Display utilities
+// - Text utilities
