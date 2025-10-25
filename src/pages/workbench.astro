@@ -1,0 +1,130 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+// Get all notes and sort by updated date (most recent first)
+const allNotes = await getCollection("works");
+
+const sortedNotes = allNotes.sort((a, b) => {
+  const dateA = new Date(a.data.updated || a.data.date);
+  const dateB = new Date(b.data.updated || b.data.date);
+  return dateB.getTime() - dateA.getTime();
+});
+
+// Group notes by year
+const notesByYear = sortedNotes.reduce(
+  (acc, note) => {
+    const date = new Date(note.data.updated || note.data.date);
+    const year = date.getFullYear().toString();
+
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(note);
+
+    return acc;
+  },
+  {} as Record<string, typeof sortedNotes>,
+);
+
+// Sort years in descending order
+const sortedYears = Object.keys(notesByYear).sort(
+  (a, b) => parseInt(b) - parseInt(a),
+);
+
+// Helper function to get icon based on category
+function getCategoryIcon(category: string): string {
+  const icons: Record<string, string> = {
+    Learning: "ri-book-2-fill",
+    Seedling: "ri-seedling-fill",
+    Budding: "ri-plant-fill",
+    Evergreen: "ri-tree-fill",
+    Now: "ri-time-line",
+    Reflections: "ri-lightbulb-line",
+    World: "ri-earth-line"
+  };
+  return icons[category] || "ri-leaf-fill";
+}
+
+// Helper function to format date
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", { month: "long", day: "numeric" });
+}
+---
+
+<BaseLayout
+  title="Notes"
+  description="Things I am independently learning and researching."
+>
+  <div class="container">
+    <div class="row justify-content-start mb-4 ml-top-padding">
+      <!-- <div class="col-12 col-lg-3 text-start mb-5">
+        <a href="/"><i class="ri-arrow-left-line"></i><em>Home</em></a>
+      </div> -->
+      <div class="heading-title col-12 col-lg-7">
+        <!-- <div class="col-12 col-lg-3 text-start mb-5"></div> -->
+        <header class="row align-items-start my-5">
+          <div class="col">
+            <a href="/"><i class="ri-arrow-left-line"></i><em>Home</em></a>
+          </div>
+          <div class="col-1 text-end">
+            <a class="page-scroll" href="#" id="btnSwitch">
+              <i class="ri-moon-line"></i>
+            </a>
+          </div>
+        </header>
+          <h1>The Garden</h1>
+
+        <p class="subtitle">Things I am independently learning and researching.</p>
+        <p>
+          I'm not keen for chronological feeds because they
+          <a
+            href="https://stackingthebricks.com/how-blogs-broke-the-web/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ruined the fun web
+          </a>.
+        </p>
+        <p>
+          However, in this page you can see a list of all my public notes sorted
+          by last updated time. This ensures that the notes I am more actively
+          working on are shown first.
+        </p>
+        <p>
+          If some things do not make sense, it is probably because the context
+          is in my private notes for my own understanding, sorry! I am
+          constantly refining my notes and publish the ones the are the most
+          relevant.
+        </p>
+        <div class="related-wrapper">
+          {
+            sortedYears.map((year) => (
+              <div class="year-group mb-4 position-relative">
+                <div class="year-heading year text-muted mb-3">{year}</div>
+                {notesByYear[year].map((note) => {
+                  const noteDate = new Date(
+                    note.data.updated || note.data.date,
+                  );
+                  return (
+                    <div class="row mb-3 mb-md-0">
+                      <div class="col">
+                        <a href={`/${note.id}`}>
+                          <i class={getCategoryIcon(note.data.category)} />
+                          {note.data.title}
+                        </a>
+                      </div>
+                      <div class="col-auto text-end text-muted">
+                        {formatDate(noteDate)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

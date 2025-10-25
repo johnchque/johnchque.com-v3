@@ -6,8 +6,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
   const worldNotes = await getCollection("world");
+  const worksNotes = await getCollection("works");
   
-  const allNotes = [...notes, ...worldNotes];
+  const allNotes = [...notes, ...worldNotes, ...worksNotes];
 
   return allNotes.map((note) => ({
     params: { slug: note.id },
