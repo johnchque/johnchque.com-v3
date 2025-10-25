@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById("fixed-top");
     const goTopBtn = document.getElementById("btt-button");
     const btnSwitch = document.getElementById('btnSwitch');
-    
+
     // Only proceed with theme switching if the button exists
     if (btnSwitch) {
         const themeIcon = btnSwitch.querySelector('i');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const getStoredTheme = () => localStorage.getItem(themeKey);
         const setStoredTheme = theme => localStorage.setItem(themeKey, theme);
-        
+
         // Get current theme (already set by the anti-flash script)
         const getCurrentTheme = () => {
             return document.documentElement.getAttribute(dataBsThemeAttr) || lightTheme;
@@ -32,11 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (themeIcon) {
                 themeIcon.setAttribute('class', theme === darkTheme ? iconSunClass : iconMoonClass);
             }
-            
+
             if (logo) {
                 logo.setAttribute('src', theme === darkTheme ? "/assets/images/logo-d.svg" : "/assets/images/logo.svg");
             }
-            
+
             // Only add animation-ready class if animate parameter is true
             if (animate) {
                 document.body.classList.add('animation-ready');
@@ -47,10 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const setTheme = (theme, animate = false) => {
             // Set the theme attribute
             document.documentElement.setAttribute(dataBsThemeAttr, theme);
-            
+
             // Update UI elements
             syncUIWithTheme(theme, animate);
-            
+
             // Store the preference
             setStoredTheme(theme);
         };
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTheme = currentTheme === darkTheme ? lightTheme : darkTheme;
             setTheme(newTheme, true); // Pass true to enable animation
         });
-        
+
         // Listen for OS theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
             if (!getStoredTheme()) { // Only auto-switch if user hasn't set preference
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initialize scroll effects on page load
         handleScroll();
-        
+
         // Add smooth scroll behavior for back to top button
         if (goTopBtn) {
             goTopBtn.addEventListener("click", (e) => {
@@ -129,7 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
-    
+
+    initVideoEmbeds();
     // Initialize focus trap for modals if they exist
     setupAccessibility();
 });
@@ -139,7 +140,7 @@ function setupAccessibility() {
     // Make skip link work - focus the main content when activated
     const skipLink = document.querySelector('.skip-link');
     if (skipLink) {
-        skipLink.addEventListener('click', function(e) {
+        skipLink.addEventListener('click', function (e) {
             e.preventDefault();
             const mainContent = document.getElementById('main-content');
             if (mainContent) {
@@ -148,7 +149,7 @@ function setupAccessibility() {
             }
         });
     }
-    
+
     // Ensure all interactive elements have appropriate focus styles
     document.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])').forEach(el => {
         if (!el.classList.contains('skip-link') && window.getComputedStyle(el).outline === 'none') {
@@ -160,17 +161,17 @@ function setupAccessibility() {
 // External toggle function - maintained for backward compatibility
 function toggle(theme) {
     document.body.classList.add('animation-ready');
-    
+
     // Get current theme from html attribute
     const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'white';
     const newTheme = currentTheme === 'dark' ? 'white' : 'dark';
-    
+
     // Set theme on html element
     document.documentElement.setAttribute('data-bs-theme', newTheme);
-    
+
     // Store preference
     localStorage.setItem('theme', newTheme);
-    
+
     // Update icon if present
     const btnSwitch = document.getElementById('btnSwitch');
     if (btnSwitch) {
@@ -179,10 +180,39 @@ function toggle(theme) {
             themeIcon.setAttribute('class', newTheme === 'dark' ? 'ri-sun-line' : 'ri-moon-line');
         }
     }
-    
+
     // Update logo if present
     const logo = document.getElementById('logo');
     if (logo) {
         logo.setAttribute('src', newTheme === 'dark' ? "/assets/images/logo-d.svg" : "/assets/images/logo.svg");
     }
+}
+function initVideoEmbeds() {
+    const previews = document.querySelectorAll('.video-embed-preview');
+
+    previews.forEach((preview) => {
+        // Check if already has listener to avoid duplicates
+        if (preview.dataset.listenerAdded) return;
+
+        preview.addEventListener('click', () => {
+            const container = preview.closest('.video-embed');
+
+            // Prevent loading if already loaded
+            if (!container || container.classList.contains('loaded')) return;
+
+            const embedUrl = preview.dataset.embedUrl;
+            if (!embedUrl) return;
+
+            // Create and insert iframe
+            const iframe = document.createElement('iframe');
+            iframe.src = `${embedUrl}?autoplay=1`;
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+
+            container.appendChild(iframe);
+            container.classList.add('loaded');
+        });
+
+        preview.dataset.listenerAdded = 'true';
+    });
 }

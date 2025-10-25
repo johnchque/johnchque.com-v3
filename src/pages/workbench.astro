@@ -41,7 +41,7 @@ function getCategoryIcon(category: string): string {
     Evergreen: "ri-tree-fill",
     Now: "ri-time-line",
     Reflections: "ri-lightbulb-line",
-    World: "ri-earth-line"
+    World: "ri-earth-line",
   };
   return icons[category] || "ri-leaf-fill";
 }
@@ -73,29 +73,20 @@ function formatDate(date: Date): string {
             </a>
           </div>
         </header>
-          <h1>The Garden</h1>
+        <h1>The workbench</h1>
 
-        <p class="subtitle">Things I am independently learning and researching.</p>
-        <p>
-          I'm not keen for chronological feeds because they
-          <a
-            href="https://stackingthebricks.com/how-blogs-broke-the-web/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ruined the fun web
-          </a>.
+        <p class="subtitle">
+          A consolidated list of all the things I created along the years.
         </p>
         <p>
-          However, in this page you can see a list of all my public notes sorted
-          by last updated time. This ensures that the notes I am more actively
-          working on are shown first.
+          The projects listed here have multiple shapes and forms, with
+          different collaborators and purposes. They go from making a music
+          video for a friend to having my own startup.
         </p>
         <p>
-          If some things do not make sense, it is probably because the context
-          is in my private notes for my own understanding, sorry! I am
-          constantly refining my notes and publish the ones the are the most
-          relevant.
+          I love building and creating things. That's why the list you see here
+          is diverse in nature. I always love to explore new knowledge areas and
+          even better if they are outside my common expertise.
         </p>
         <div class="related-wrapper">
           {
@@ -109,10 +100,8 @@ function formatDate(date: Date): string {
                   return (
                     <div class="row mb-3 mb-md-0">
                       <div class="col">
-                        <a href={`/${note.id}`}>
-                          <i class={getCategoryIcon(note.data.category)} />
-                          {note.data.title}
-                        </a>
+                        <a href={`/${note.id}`}>{note.data.title}</a>
+                        <p>{note.data.description}</p>
                       </div>
                       <div class="col-auto text-end text-muted">
                         {formatDate(noteDate)}

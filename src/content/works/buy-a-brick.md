@@ -17,35 +17,16 @@ My contribution to the donation campaign was focused on producing 6 videos with 
 
 Here you can see all the videos I made.
 
-<iframe width="auto" height="auto"
-  src="https://www.youtube.com/embed/khdT1e7jEIE"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-  loading="lazy"
-  >
-</iframe>
+https://www.youtube.com/watch?v=EeVhzFmeVLw
 
-{% include youtube_player.html id='EeVhzFmeVLw' %}
+https://www.youtube.com/watch?v=iX72gVoROoI
 
-<div class="row">
-<div class="col-12 col-sm-6">
-{% include youtube_player.html id='iX72gVoROoI' %}
-</div>
-<div class="col-12 col-sm-6">
-{% include youtube_player.html id='pROiY85wtiA' %}
-</div>
-<div class="col-12 col-sm-6">
-{% include youtube_player.html id='67cZNNwnn0Q' %}
-</div>
-<div class="col-12 col-sm-6">
-{% include youtube_player.html id='uoWoMVA-4FY' %}
-</div>
-<div class="col-12 col-sm-6">
-{% include youtube_player.html id='7EhUBuzNxiA' %}
-</div>
-<div class="col-12 col-sm-6">
-{% include youtube_player.html id='kjlAS95qX9M' %}
-</div>
-</div>
+https://www.youtube.com/watch?v=pROiY85wtiA
+
+https://www.youtube.com/watch?v=67cZNNwnn0Q
+
+https://www.youtube.com/watch?v=uoWoMVA-4FY
+
+https://www.youtube.com/watch?v=7EhUBuzNxiA
+
+https://www.youtube.com/watch?v=kjlAS95qX9M
