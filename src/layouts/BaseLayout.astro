@@ -1,6 +1,7 @@
 ---
 import Background from "../components/Background.astro";
 import "../styles/global.scss";
+import { Icon } from 'astro-icon/components'
 
 interface Props {
   title?: string;
@@ -93,10 +94,6 @@ const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
     {description && <meta property="og:description" content={description} />}
 
     <!-- Stylesheets -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
     {
       hasMath && (
         <link
@@ -121,7 +118,8 @@ const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
       class="back-to-top page-scroll"
       id="btt-button"
       aria-label="Back to top"
-      ><i class="ri-arrow-up-wide-line"></i>
+      >
+      <Icon name="arrow-up"/>
     </a>
 
     <!-- Scripts -->

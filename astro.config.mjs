@@ -4,6 +4,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { remarkImageKit } from './src/plugins/remark-imagekit.mjs';
 import { remarkVideoEmbed } from './src/plugins/remark-link-preview.mjs';
+import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,4 +12,6 @@ export default defineConfig({
     remarkPlugins: [remarkMath, remarkImageKit, remarkVideoEmbed],
     rehypePlugins: [rehypeKatex],
   },
+
+  integrations: [icon()],
 });

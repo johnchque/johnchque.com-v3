@@ -208,9 +208,10 @@ a.dark {
   font-size: 17px;
 }
 
-i[class^="ri"] {
-  display: inline-block;
-  vertical-align: baseline;
+[data-icon] {
+  position: relative;
+    top: 0.125em; /* Adjust this value as needed */
+    vertical-align: baseline;
 }
 
 /* ==========================================

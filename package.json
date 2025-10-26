@@ -11,6 +11,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "astro": "^5.14.4",
+    "astro-icon": "^1.1.5",
     "bootstrap": "^5.3.8",
     "katex": "^0.16.25",
     "rehype-katex": "^7.0.1",

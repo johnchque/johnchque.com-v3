@@ -2,6 +2,7 @@
 // src/pages/notes/[...slug].astro
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components'
 
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
@@ -53,12 +54,12 @@ const formattedDate = new Date(updatedDate).toLocaleDateString("en-US", {
         <header class="row align-items-start my-5">
           <nav class="col" aria-label="Breadcrumb">
             <a href="/notes">
-              <i class="ri-arrow-left-line"></i><em>Notes</em>
+              <Icon name="arrow-left"/><em>Notes</em>
             </a>
           </nav>
           <div class="col-1 text-end">
             <a class="page-scroll" href="#" id="btnSwitch">
-              <i class="ri-moon-line"></i>
+              <Icon name="moon" />
             </a>
           </div>
         </header>

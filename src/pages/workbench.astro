@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { Icon } from 'astro-icon/components'
 
 // Get all notes and sort by updated date (most recent first)
 const allNotes = await getCollection("works");
@@ -58,18 +59,14 @@ function formatDate(date: Date): string {
 >
   <div class="container">
     <div class="row justify-content-start mb-4 ml-top-padding">
-      <!-- <div class="col-12 col-lg-3 text-start mb-5">
-        <a href="/"><i class="ri-arrow-left-line"></i><em>Home</em></a>
-      </div> -->
       <div class="heading-title col-12 col-lg-7">
-        <!-- <div class="col-12 col-lg-3 text-start mb-5"></div> -->
         <header class="row align-items-start my-5">
           <div class="col">
-            <a href="/"><i class="ri-arrow-left-line"></i><em>Home</em></a>
+            <a href="/"><Icon name="arrow-left"/><em>Home</em></a>
           </div>
           <div class="col-1 text-end">
             <a class="page-scroll" href="#" id="btnSwitch">
-              <i class="ri-moon-line"></i>
+              <Icon name="moon">
             </a>
           </div>
         </header>
