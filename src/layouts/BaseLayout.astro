@@ -6,7 +6,6 @@ import { Icon } from 'astro-icon/components'
 interface Props {
   title?: string;
   description?: string;
-  bannerImage?: string;
   hasImages?: boolean;
   hasMath?: boolean;
 }
@@ -14,13 +13,12 @@ interface Props {
 const {
   title,
   description,
-  bannerImage,
   hasImages = false,
   hasMath = false,
 } = Astro.props;
 
 const siteTitle = "John Choque";
-const siteUrl = Astro.site?.toString() || "https://yoursite.com";
+const siteUrl = Astro.site?.toString() || "https://johnchque.com";
 const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
 ---
