@@ -1,0 +1,1439 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Aeterna - Enterprise AI Infrastructure for Europe</title>
+        <meta
+            name="description"
+            content="Give your team AI everywhere. Keep sensitive data private. Deploy in days, not months. GDPR-compliant by design."
+        />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Junicode:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family:
+                    "Geist",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    sans-serif;
+                line-height: 1.6;
+                color: #ededed;
+                background: #000000;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            /* Typography */
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: "Junicode", Georgia, serif;
+                font-weight: 400;
+                letter-spacing: -0.02em;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 24px;
+            }
+
+            /* Header */
+            header {
+                padding: 20px 0;
+                border-bottom: 1px solid #1a1a1a;
+                position: sticky;
+                top: 0;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(12px);
+                z-index: 100;
+            }
+
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo {
+                font-size: 24px;
+                font-weight: 400;
+                font-family: "Junicode", serif;
+                color: #ffffff;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                letter-spacing: 0.02em;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: 600;
+                font-size: 18px;
+                font-family: "Junicode", serif;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 32px;
+                align-items: center;
+            }
+
+            .nav-links a {
+                color: #888;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+                transition: color 0.2s;
+            }
+
+            .nav-links a:hover {
+                color: #ffffff;
+            }
+
+            .mobile-menu-button {
+                display: none;
+                background: transparent;
+                border: 1px solid #333;
+                color: #ffffff;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 18px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+
+            .mobile-menu-button:hover {
+                background: #111;
+                border-color: #444;
+            }
+
+            .cta-button {
+                background: #ffffff;
+                color: #000000;
+                padding: 10px 20px;
+                border-radius: 6px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 14px;
+                transition: all 0.2s;
+                border: 1px solid #ffffff;
+                display: inline-block;
+            }
+
+            .cta-button:hover {
+                background: #ededed;
+                transform: translateY(-1px);
+            }
+
+            .cta-button-secondary {
+                background: transparent;
+                color: #ffffff;
+                border: 1px solid #333;
+            }
+
+            .cta-button-secondary:hover {
+                background: #111;
+                border-color: #444;
+            }
+
+            /* Hero Section */
+            .hero {
+                padding: 140px 0 100px;
+                text-align: center;
+                position: relative;
+            }
+
+            .hero::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 600px;
+                height: 600px;
+                background: radial-gradient(
+                    circle,
+                    rgba(59, 130, 246, 0.15) 0%,
+                    transparent 70%
+                );
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            .hero > .container {
+                position: relative;
+                z-index: 1;
+            }
+
+            .hero h1 {
+                font-size: 72px;
+                font-weight: 400;
+                line-height: 1.1;
+                margin-bottom: 24px;
+                color: #ffffff;
+                letter-spacing: -0.03em;
+            }
+
+            .hero .subtitle {
+                font-size: 24px;
+                color: #888;
+                margin-bottom: 16px;
+                font-weight: 400;
+            }
+
+            .hero .description {
+                font-size: 16px;
+                color: #666;
+                max-width: 700px;
+                margin: 0 auto 40px;
+                font-weight: 400;
+                line-height: 1.7;
+            }
+
+            .badges {
+                display: flex;
+                gap: 12px;
+                justify-content: center;
+                margin-bottom: 40px;
+                flex-wrap: wrap;
+            }
+
+            .badge {
+                background: #0a0a0a;
+                color: #888;
+                padding: 6px 14px;
+                border-radius: 20px;
+                font-size: 13px;
+                font-weight: 500;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                border: 1px solid #1a1a1a;
+            }
+
+            .cta-group {
+                display: flex;
+                gap: 12px;
+                justify-content: center;
+                margin-bottom: 32px;
+                flex-wrap: wrap;
+            }
+
+            .platform-badges {
+                display: flex;
+                gap: 16px;
+                justify-content: center;
+                color: #666;
+                font-size: 13px;
+                font-weight: 500;
+                flex-wrap: wrap;
+            }
+
+            /* Demo Video Section */
+            .demo-section {
+                padding: 40px 0 100px;
+            }
+
+            .demo-video {
+                max-width: 1000px;
+                margin: 0 auto;
+                border-radius: 12px;
+                overflow: hidden;
+                background: #0a0a0a;
+                aspect-ratio: 16/9;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                border: 1px solid #1a1a1a;
+            }
+
+            .demo-placeholder {
+                color: #666;
+                font-size: 16px;
+                text-align: center;
+                font-weight: 500;
+                padding: 20px;
+            }
+
+            /* Features Section */
+            .features {
+                padding: 100px 0;
+                border-top: 1px solid #1a1a1a;
+            }
+
+            .section-header {
+                text-align: center;
+                margin-bottom: 80px;
+            }
+
+            .section-header h2 {
+                font-size: 48px;
+                font-weight: 400;
+                margin-bottom: 16px;
+                color: #ffffff;
+                letter-spacing: -0.02em;
+            }
+
+            .section-header p {
+                font-size: 16px;
+                color: #666;
+                max-width: 600px;
+                margin: 0 auto;
+                font-weight: 400;
+            }
+
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 1px;
+                background: #1a1a1a;
+                border: 1px solid #1a1a1a;
+                border-radius: 12px;
+                overflow: hidden;
+            }
+
+            .feature-card {
+                background: #000000;
+                padding: 40px;
+                transition: all 0.3s;
+            }
+
+            .feature-card:hover {
+                background: #0a0a0a;
+            }
+
+            .feature-icon {
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+
+            .feature-card h3 {
+                font-size: 20px;
+                margin-bottom: 12px;
+                font-weight: 600;
+                color: #ffffff;
+                font-family: "Geist", sans-serif;
+            }
+
+            .feature-card p {
+                color: #888;
+                font-size: 14px;
+                line-height: 1.7;
+                font-weight: 400;
+            }
+
+            /* Use Cases Section */
+            .use-cases {
+                padding: 100px 0;
+                border-top: 1px solid #1a1a1a;
+            }
+
+            .use-cases-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 24px;
+            }
+
+            .use-case {
+                padding: 32px;
+                background: #0a0a0a;
+                border: 1px solid #1a1a1a;
+                border-radius: 12px;
+                transition: all 0.3s;
+            }
+
+            .use-case:hover {
+                border-color: #333;
+                background: #0f0f0f;
+                transform: translateY(-2px);
+            }
+
+            .use-case-icon {
+                font-size: 32px;
+                margin-bottom: 16px;
+            }
+
+            .use-case h3 {
+                font-size: 18px;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #ffffff;
+                font-family: "Geist", sans-serif;
+            }
+
+            .use-case p {
+                color: #888;
+                font-size: 13px;
+                line-height: 1.6;
+                font-weight: 400;
+            }
+
+            /* How It Works */
+            .how-it-works {
+                padding: 100px 0;
+                border-top: 1px solid #1a1a1a;
+            }
+
+            .steps {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 48px;
+                margin-top: 80px;
+            }
+
+            .step {
+                text-align: center;
+                position: relative;
+            }
+
+            .step-number {
+                width: 56px;
+                height: 56px;
+                background: #0a0a0a;
+                color: #ffffff;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                font-weight: 400;
+                margin: 0 auto 24px;
+                font-family: "Junicode", serif;
+                border: 1px solid #1a1a1a;
+            }
+
+            .step h3 {
+                font-size: 20px;
+                margin-bottom: 12px;
+                color: #ffffff;
+                font-weight: 600;
+                font-family: "Geist", sans-serif;
+            }
+
+            .step p {
+                color: #888;
+                font-size: 14px;
+                line-height: 1.7;
+                font-weight: 400;
+            }
+
+            /* Comparison Section */
+            .comparison {
+                padding: 100px 0;
+                border-top: 1px solid #1a1a1a;
+            }
+
+            .comparison-table {
+                max-width: 1000px;
+                margin: 0 auto;
+                background: #0a0a0a;
+                border-radius: 12px;
+                overflow-x: auto;
+                border: 1px solid #1a1a1a;
+            }
+
+            .comparison-table table {
+                width: 100%;
+                border-collapse: collapse;
+                min-width: 600px;
+            }
+
+            .comparison-table th {
+                background: #000000;
+                color: #ffffff;
+                padding: 20px;
+                text-align: left;
+                font-weight: 600;
+                font-family: "Geist", sans-serif;
+                font-size: 13px;
+                border-bottom: 1px solid #1a1a1a;
+            }
+
+            .comparison-table td {
+                padding: 20px;
+                font-weight: 500;
+                font-size: 13px;
+                border-bottom: 1px solid #1a1a1a;
+                color: #888;
+            }
+
+            .comparison-table tr:last-child td {
+                border-bottom: none;
+            }
+
+            .comparison-table td:first-child {
+                color: #ededed;
+                font-weight: 600;
+            }
+
+            .check {
+                color: #10b981;
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            .cross {
+                color: #ef4444;
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            /* Social Proof */
+            .social-proof {
+                padding: 100px 0;
+                border-top: 1px solid #1a1a1a;
+            }
+
+            .testimonials {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 24px;
+                margin-top: 60px;
+            }
+
+            .testimonial {
+                background: #0a0a0a;
+                padding: 32px;
+                border-radius: 12px;
+                border: 1px solid #1a1a1a;
+                transition: all 0.3s;
+            }
+
+            .testimonial:hover {
+                border-color: #333;
+                background: #0f0f0f;
+            }
+
+            .testimonial-text {
+                font-size: 15px;
+                line-height: 1.7;
+                color: #888;
+                margin-bottom: 24px;
+                font-style: italic;
+                font-weight: 400;
+            }
+
+            .testimonial-author {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .author-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: 600;
+                font-size: 14px;
+            }
+
+            .author-info h4 {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 2px;
+                font-family: "Geist", sans-serif;
+                color: #ededed;
+            }
+
+            .author-info p {
+                font-size: 12px;
+                color: #666;
+                font-weight: 400;
+            }
+
+            /* CTA Section */
+            .final-cta {
+                padding: 140px 0;
+                text-align: center;
+                border-top: 1px solid #1a1a1a;
+                position: relative;
+            }
+
+            .final-cta::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 800px;
+                height: 400px;
+                background: radial-gradient(
+                    circle,
+                    rgba(59, 130, 246, 0.1) 0%,
+                    transparent 70%
+                );
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            .final-cta > .container {
+                position: relative;
+                z-index: 1;
+            }
+
+            .final-cta h2 {
+                font-size: 56px;
+                font-weight: 400;
+                margin-bottom: 24px;
+                color: #ffffff;
+                letter-spacing: -0.02em;
+            }
+
+            .final-cta p {
+                font-size: 18px;
+                margin-bottom: 40px;
+                color: #888;
+                font-weight: 400;
+            }
+
+            .final-cta .cta-button {
+                font-size: 16px;
+                padding: 14px 28px;
+            }
+
+            /* Footer */
+            footer {
+                padding: 80px 0 40px;
+                border-top: 1px solid #1a1a1a;
+            }
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 48px;
+                margin-bottom: 60px;
+            }
+
+            .footer-section h3 {
+                color: #ededed;
+                font-size: 14px;
+                margin-bottom: 16px;
+                font-weight: 600;
+                font-family: "Geist", sans-serif;
+            }
+
+            .footer-section a {
+                color: #666;
+                text-decoration: none;
+                display: block;
+                margin-bottom: 8px;
+                font-size: 13px;
+                font-weight: 400;
+                transition: color 0.2s;
+            }
+
+            .footer-section a:hover {
+                color: #ededed;
+            }
+
+            .footer-bottom {
+                text-align: center;
+                padding-top: 40px;
+                border-top: 1px solid #1a1a1a;
+                font-size: 13px;
+                font-weight: 400;
+                color: #666;
+            }
+
+            /* Responsive Styles */
+
+            /* Tablet styles (768px - 1024px) */
+            @media (max-width: 1024px) {
+                .container {
+                    padding: 0 20px;
+                }
+
+                .hero h1 {
+                    font-size: 56px;
+                }
+
+                .hero .subtitle {
+                    font-size: 22px;
+                }
+
+                .section-header h2 {
+                    font-size: 40px;
+                }
+
+                .final-cta h2 {
+                    font-size: 48px;
+                }
+
+                .features-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .steps {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 40px;
+                }
+            }
+
+            /* Mobile styles (481px - 768px) */
+            @media (max-width: 768px) {
+                .container {
+                    padding: 0 16px;
+                }
+
+                /* Header/Navigation */
+                .nav-links {
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: rgba(0, 0, 0, 0.95);
+                    backdrop-filter: blur(12px);
+                    flex-direction: column;
+                    padding: 20px;
+                    gap: 16px;
+                    border-top: 1px solid #1a1a1a;
+                }
+
+                .nav-links.active {
+                    display: flex;
+                }
+
+                .nav-links a {
+                    font-size: 16px;
+                    padding: 8px 0;
+                }
+
+                .mobile-menu-button {
+                    display: block;
+                }
+
+                /* Hero Section */
+                .hero {
+                    padding: 100px 0 60px;
+                }
+
+                .hero::before {
+                    width: 400px;
+                    height: 400px;
+                }
+
+                .hero h1 {
+                    font-size: 40px;
+                    margin-bottom: 20px;
+                }
+
+                .hero .subtitle {
+                    font-size: 18px;
+                    margin-bottom: 12px;
+                }
+
+                .hero .description {
+                    font-size: 15px;
+                    margin-bottom: 32px;
+                }
+
+                .badges {
+                    gap: 8px;
+                    margin-bottom: 32px;
+                }
+
+                .badge {
+                    font-size: 12px;
+                    padding: 5px 12px;
+                }
+
+                .cta-group {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+
+                .cta-group .cta-button {
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .platform-badges {
+                    gap: 12px;
+                    font-size: 12px;
+                }
+
+                /* Demo Section */
+                .demo-section {
+                    padding: 20px 0 60px;
+                }
+
+                .demo-placeholder {
+                    font-size: 14px;
+                }
+
+                /* Sections */
+                .features,
+                .use-cases,
+                .how-it-works,
+                .comparison,
+                .social-proof {
+                    padding: 60px 0;
+                }
+
+                .section-header {
+                    margin-bottom: 48px;
+                }
+
+                .section-header h2 {
+                    font-size: 32px;
+                    margin-bottom: 12px;
+                }
+
+                .section-header p {
+                    font-size: 14px;
+                }
+
+                /* Features Grid */
+                .features-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .feature-card {
+                    padding: 28px;
+                }
+
+                .feature-icon {
+                    font-size: 28px;
+                    margin-bottom: 16px;
+                }
+
+                .feature-card h3 {
+                    font-size: 18px;
+                }
+
+                .feature-card p {
+                    font-size: 13px;
+                }
+
+                /* Use Cases */
+                .use-cases-grid {
+                    grid-template-columns: 1fr;
+                    gap: 16px;
+                }
+
+                .use-case {
+                    padding: 24px;
+                }
+
+                /* Steps */
+                .steps {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                    margin-top: 48px;
+                }
+
+                .step-number {
+                    width: 48px;
+                    height: 48px;
+                    font-size: 20px;
+                    margin-bottom: 20px;
+                }
+
+                .step h3 {
+                    font-size: 18px;
+                }
+
+                .step p {
+                    font-size: 13px;
+                }
+
+                /* Comparison Table */
+                .comparison-table {
+                    border-radius: 8px;
+                }
+
+                .comparison-table th,
+                .comparison-table td {
+                    padding: 12px;
+                    font-size: 11px;
+                }
+
+                .comparison-table th:first-child,
+                .comparison-table td:first-child {
+                    position: sticky;
+                    left: 0;
+                    background: #0a0a0a;
+                    z-index: 1;
+                }
+
+                .comparison-table th:first-child {
+                    background: #000000;
+                }
+
+                /* Testimonials */
+                .testimonials {
+                    grid-template-columns: 1fr;
+                    gap: 16px;
+                    margin-top: 40px;
+                }
+
+                .testimonial {
+                    padding: 24px;
+                }
+
+                .testimonial-text {
+                    font-size: 14px;
+                    margin-bottom: 20px;
+                }
+
+                /* Final CTA */
+                .final-cta {
+                    padding: 80px 0;
+                }
+
+                .final-cta::before {
+                    width: 500px;
+                    height: 300px;
+                }
+
+                .final-cta h2 {
+                    font-size: 36px;
+                    margin-bottom: 20px;
+                }
+
+                .final-cta p {
+                    font-size: 16px;
+                    margin-bottom: 32px;
+                }
+
+                .final-cta .cta-button {
+                    font-size: 15px;
+                    padding: 12px 24px;
+                    width: 100%;
+                }
+
+                /* Footer */
+                footer {
+                    padding: 60px 0 32px;
+                }
+
+                .footer-content {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 32px;
+                    margin-bottom: 40px;
+                }
+
+                .footer-section h3 {
+                    font-size: 13px;
+                    margin-bottom: 12px;
+                }
+
+                .footer-section a {
+                    font-size: 12px;
+                    margin-bottom: 6px;
+                }
+
+                .footer-bottom {
+                    padding-top: 32px;
+                    font-size: 12px;
+                }
+            }
+
+            /* Small mobile styles (320px - 480px) */
+            @media (max-width: 480px) {
+                .container {
+                    padding: 0 12px;
+                }
+
+                .logo {
+                    font-size: 20px;
+                }
+
+                .logo-icon {
+                    width: 28px;
+                    height: 28px;
+                    font-size: 16px;
+                }
+
+                .hero h1 {
+                    font-size: 32px;
+                }
+
+                .hero .subtitle {
+                    font-size: 16px;
+                }
+
+                .hero .description {
+                    font-size: 14px;
+                }
+
+                .section-header h2 {
+                    font-size: 28px;
+                }
+
+                .feature-card,
+                .use-case,
+                .testimonial {
+                    padding: 20px;
+                }
+
+                .final-cta h2 {
+                    font-size: 28px;
+                }
+
+                .final-cta p {
+                    font-size: 14px;
+                }
+
+                .footer-content {
+                    grid-template-columns: 1fr;
+                    gap: 24px;
+                }
+
+                .comparison-table th,
+                .comparison-table td {
+                    padding: 10px 8px;
+                    font-size: 10px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header>
+            <nav class="container">
+                <a href="/" class="logo">
+                    <div class="logo-icon">Æ</div>
+                    Aeterna
+                </a>
+                <button class="mobile-menu-button" onclick="toggleMobileMenu()">
+                    ☰
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#" class="cta-button-secondary">Book Demo</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Enterprise AI.<br />Private by Default.</h1>
+                <p class="subtitle">
+                    Give your team AI everywhere. Keep sensitive data local.
+                    Deploy in days, not months.
+                </p>
+                <p class="description">
+                    Aeterna runs on every employee's computer, works in every
+                    application, and automatically keeps GDPR-sensitive data
+                    on-device. Built for European enterprises.
+                </p>
+
+                <div class="badges">
+                    <span class="badge">🔒 GDPR Compliant</span>
+                    <span class="badge">⚡ Deploy in 1 Week</span>
+                    <span class="badge">🇪🇺 EU AI Act Ready</span>
+                    <span class="badge">♻️ 45% Less Carbon</span>
+                </div>
+
+                <div class="cta-group">
+                    <a href="#demo" class="cta-button">Start Free Pilot</a>
+                    <a
+                        href="#how-it-works"
+                        class="cta-button cta-button-secondary"
+                        >See How It Works</a
+                    >
+                </div>
+
+                <div class="platform-badges">
+                    <span>🍎 macOS</span>
+                    <span>🪟 Windows</span>
+                    <span>🐧 Linux</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Video -->
+        <section class="demo-section">
+            <div class="container">
+                <div class="demo-video">
+                    <div class="demo-placeholder">
+                        <p>📹 Product Demo Video</p>
+                        <p
+                            style="font-size: 13px; margin-top: 8px; color: #555;"
+                        >
+                            Watch how Aeterna works in 90 seconds
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Everything Your Team Needs. Nothing They Don't.</h2>
+                    <p>Enterprise-grade AI infrastructure that just works.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Private by Design</h3>
+                        <p>
+                            Sensitive data never leaves the device.
+                            GDPR-compliant automatically. Zero trust
+                            architecture with full audit trails.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Works Everywhere</h3>
+                        <p>
+                            Gmail, Slack, Word, browser—any application. No
+                            switching contexts. Just right-click or use keyboard
+                            shortcuts.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Smart Routing</h3>
+                        <p>
+                            Automatically classifies sensitive vs non-sensitive.
+                            Routes appropriately. Local models for privacy,
+                            cloud for speed.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">👨‍💼</div>
+                        <h3>IT Controls Everything</h3>
+                        <p>
+                            Set policies by department, role, data type. Monitor
+                            usage. Audit every query. Deploy via MDM (Intune,
+                            Jamf).
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Compliance Dashboard</h3>
+                        <p>
+                            Real-time visibility into AI usage. Export reports
+                            for auditors. Track GDPR compliance. Ready for EU AI
+                            Act 2026.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌱</div>
+                        <h3>Sustainable AI</h3>
+                        <p>
+                            Local inference reduces carbon emissions by 45%.
+                            Track environmental impact. Transparent
+                            sustainability reporting.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section id="use-cases" class="use-cases">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Built for Regulated Industries</h2>
+                    <p>Enterprises with sensitive data trust Aeterna</p>
+                </div>
+
+                <div class="use-cases-grid">
+                    <div class="use-case">
+                        <div class="use-case-icon">🏥</div>
+                        <h3>Healthcare</h3>
+                        <p>
+                            Process patient data locally. Summarize charts.
+                            Draft clinical notes. HIPAA/GDPR compliant by
+                            design.
+                        </p>
+                    </div>
+
+                    <div class="use-case">
+                        <div class="use-case-icon">⚖️</div>
+                        <h3>Legal</h3>
+                        <p>
+                            Analyze contracts. Research case law. Draft
+                            documents. Client data stays confidential on your
+                            devices.
+                        </p>
+                    </div>
+
+                    <div class="use-case">
+                        <div class="use-case-icon">🏛️</div>
+                        <h3>Government</h3>
+                        <p>
+                            Process citizen data securely. Draft communications.
+                            Analyze policy. Full data sovereignty.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Deploy AI in One Week</h2>
+                    <p>Not six months. Not complex integrations. Just works.</p>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>IT Configures Policies</h3>
+                        <p>
+                            Define what's sensitive for your organization. Set
+                            department rules. Configure model preferences.
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Deploy to Employees</h3>
+                        <p>
+                            Push via MDM (Intune, Jamf). Aeterna installs
+                            silently. Runs in background. Zero employee training
+                            needed.
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Teams Use AI Everywhere</h3>
+                        <p>
+                            Right-click in any app. Use keyboard shortcuts. AI
+                            just works. Compliance is automatic.
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>IT Monitors & Reports</h3>
+                        <p>
+                            Dashboard shows usage, compliance, savings. Export
+                            reports for auditors. Full visibility.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="comparison">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Enterprises Choose Aeterna</h2>
+                    <p>See how we compare to alternatives</p>
+                </div>
+
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Aeterna</th>
+                                <th>ChatGPT Enterprise</th>
+                                <th>AWS Bedrock</th>
+                                <th>On-Premise LLM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Local Data Processing</td>
+                                <td><span class="check">✓</span></td>
+                                <td><span class="cross">✗</span></td>
+                                <td><span class="cross">✗</span></td>
+                                <td><span class="check">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Works in All Apps</td>
+                                <td><span class="check">✓</span></td>
+                                <td><span class="cross">✗</span></td>
+                                <td><span class="cross">✗</span></td>
+                                <td><span class="cross">✗</span></td>
+                            </tr>
+                            <tr>
+                                <td>Deploy in <1 Week</td>
+                                <td><span class="check">✓</span></td>
+                                <td><span class="check">✓</span></td>
+                                <td><span class="cross">✗</span></td>
+                                <td><span class="cross">✗</span></td>
+                            </tr>
+                            <tr>
+                                <td>GDPR Compliant</td>
+                                <td><span class="check">✓</span></td>
+                                <td><span class="cross">~</span></td>
+                                <td><span class="cross">~</span></td>
+                                <td><span class="check">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>EU AI Act Ready</td>
+                                <td><span class="check">✓</span></td>
+                                <td><span class="cross">✗</span></td>
+                                <td><span class="cross">✗</span></td>
+                                <td><span class="cross">~</span></td>
+                            </tr>
+                            <tr>
+                                <td>European Company</td>
+                                <td><span class="check">✓</span></td>
+                                <td><span class="cross">✗</span></td>
+                                <td><span class="cross">✗</span></td>
+                                <td><span class="cross">~</span></td>
+                            </tr>
+                            <tr>
+                                <td>Cost per User/Year</td>
+                                <td>€129</td>
+                                <td>€180+</td>
+                                <td>€200+</td>
+                                <td>€300+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container">
+                <h2>Ready to Give Your Team AI?</h2>
+                <p>Reach out to know more about our platform.</p>
+                <a
+                    href="mailto:hello@aeterna.ai?subject=Pilot Program Request"
+                    class="cta-button">Get in Touch →</a
+                >
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Product</h3>
+                        <a href="#features">Features</a>
+                        <a href="#use-cases">Use Cases</a>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#">Documentation</a>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Company</h3>
+                        <a href="#">About Us</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Contact</a>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Resources</h3>
+                        <a href="#">GDPR Guide</a>
+                        <a href="#">EU AI Act Compliance</a>
+                        <a href="#">Case Studies</a>
+                        <a href="#">Security & Privacy</a>
+                        <a href="#">API Documentation</a>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Legal</h3>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Data Processing Agreement</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>© 2025 Aeterna. Built in Copenhagen for Europe. 🇪🇺</p>
+                    <p style="margin-top: 8px; font-size: 12px;">
+                        Making enterprise AI private, compliant, and
+                        sustainable.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            function toggleMobileMenu() {
+                const navLinks = document.getElementById("navLinks");
+                if (navLinks) {
+                    navLinks.classList.toggle("active");
+                }
+            }
+
+            // Close mobile menu when clicking outside
+            document.addEventListener("click", function (event) {
+                const target = event.target;
+                const navLinks = document.getElementById("navLinks");
+                const mobileMenuButton = document.querySelector(
+                    ".mobile-menu-button",
+                );
+
+                // Check if target is a Node before using contains
+                if (navLinks && mobileMenuButton && target instanceof Node) {
+                    if (
+                        !navLinks.contains(target) &&
+                        !mobileMenuButton.contains(target) &&
+                        navLinks.classList.contains("active")
+                    ) {
+                        navLinks.classList.remove("active");
+                    }
+                }
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll(".nav-links a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    const navLinks = document.getElementById("navLinks");
+                    if (navLinks) {
+                        navLinks.classList.remove("active");
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
