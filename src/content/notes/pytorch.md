@@ -107,4 +107,3 @@ How should I approach this course?
 - Ask questions.
 - Do the exercises.
 
-meet.google.com/rsz-kqsd-ziz

@@ -24,7 +24,7 @@
 
   /* Typography */
   --font-heading: "Libre Baskerville", serif;
-  --font-body: "PT Serif", sans-serif;
+  --font-body: "Literata", sans-serif;
   --font-signature: "Signature", sans-serif;
   --font-sans-serif: "PT Serif", sans-serif;
 
@@ -112,6 +112,22 @@
   font-weight: 400;
   font-display: block;
   src: url("/assets/fonts/PTSerif.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Literata";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/assets/fonts/Literata.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Crimson Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/assets/fonts/CrimsonPro.ttf") format("truetype");
 }
 
 body,
@@ -210,8 +226,9 @@ a.dark {
 
 [data-icon] {
   position: relative;
-    top: 0.125em; /* Adjust this value as needed */
-    vertical-align: baseline;
+  top: 0.125em;
+  /* Adjust this value as needed */
+  vertical-align: baseline;
 }
 
 /* ==========================================

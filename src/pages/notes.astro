@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 // Get all notes and sort by updated date (most recent first)
 const notes = await getCollection("notes");
@@ -45,7 +45,7 @@ function getCategoryIcon(category: string): string {
     Evergreen: "tree",
     Now: "time",
     Reflections: "lightbulb",
-    World: "earth"
+    World: "earth",
   };
   return icons[category] || "leaf";
 }
@@ -65,17 +65,19 @@ function formatDate(date: Date): string {
       <div class="heading-title col-12 col-lg-7">
         <header class="row align-items-start my-5">
           <div class="col">
-            <a href="/"><Icon name="arrow-left"/><em>Home</em></a>
+            <a href="/"><Icon name="arrow-left" /><em>Home</em></a>
           </div>
           <div class="col-1 text-end">
             <a class="page-scroll" href="#" id="btnSwitch">
-              <Icon name="moon">
+              <Icon name="moon" />
             </a>
           </div>
         </header>
-          <h1>The Garden</h1>
+        <h1>The Garden</h1>
 
-        <p class="subtitle">Things I am independently learning and researching.</p>
+        <p class="subtitle">
+          Things I am independently learning and researching.
+        </p>
         <p>
           I'm not keen for chronological feeds because they
           <a
