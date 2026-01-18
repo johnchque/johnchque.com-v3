@@ -93,7 +93,7 @@
   font-family: "Libre Baskerville";
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   /* Ensure no font swap */
   src: url("/assets/fonts/libre-baskerville-400.woff2") format("woff2");
 }
@@ -102,7 +102,7 @@
   font-family: "Libre Baskerville";
   font-style: normal;
   font-weight: 700;
-  font-display: block;
+  font-display: swap;
   src: url("/assets/fonts/libre-baskerville-700.woff2") format("woff2");
 }
 
@@ -110,7 +110,7 @@
   font-family: "PT Serif";
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   src: url("/assets/fonts/PTSerif.ttf") format("truetype");
 }
 
@@ -118,15 +118,15 @@
   font-family: "Literata";
   font-style: normal;
   font-weight: 400;
-  font-display: block;
-  src: url("/assets/fonts/Literata.ttf") format("truetype");
+  font-display: swap;
+  src: url("/assets/fonts/Literata.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Crimson Pro";
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   src: url("/assets/fonts/CrimsonPro.ttf") format("truetype");
 }
 
