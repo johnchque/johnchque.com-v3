@@ -2,13 +2,13 @@
 // src/pages/notes/[...slug].astro
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
   const worldNotes = await getCollection("world");
   const worksNotes = await getCollection("works");
-  
+
   const allNotes = [...notes, ...worldNotes, ...worksNotes];
 
   return allNotes.map((note) => ({
@@ -48,22 +48,9 @@ const formattedDate = new Date(updatedDate).toLocaleDateString("en-US", {
   hasMath={true}
   hasImages={true}
 >
-  <div class="container">
-    <div class="row justify-content-start mb-4 ml-top-padding">
-      <article class="heading-title col-12 col-lg-7">
-        <header class="row align-items-start my-5">
-          <nav class="col" aria-label="Breadcrumb">
-            <a href="/notes">
-              <Icon name="arrow-left"/><em>Notes</em>
-            </a>
-          </nav>
-          <div class="col-1 text-end">
-            <a class="page-scroll" href="#" id="btnSwitch">
-              <Icon name="moon" />
-            </a>
-          </div>
-        </header>
-
+  <div class="container post-">
+    <div class="row justify-content-start mb-4 m-top-padding">
+      <article class="heading-title col-12 col-lg-12">
         <h1>{note.data.title}</h1>
         <p class="subtitle">{note.data.description}</p>
         <p class="text-muted">

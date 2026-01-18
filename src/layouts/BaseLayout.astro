@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { title, description, hasImages = false, hasMath = false } = Astro.props;
-
+const currentPath = Astro.url.pathname;
 const siteTitle = "John Choque";
 const siteUrl = Astro.site?.toString() || "https://johnchque.com";
 const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
@@ -105,23 +105,51 @@ const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
       )
     }
   </head>
-
-  <body id="body">
+  <body>
     <Background />
+    <div class="layout">
+      <nav class="sidebar">
+        <ul>
+          <li>
+            <a class="page-scroll" href="#" id="btnSwitch"
+              ><Icon name="moon" /></a
+            >
+          </li>
+          <li>
+            <a href="/" class={currentPath === "/" ? "active" : ""}>home</a>
+          </li>
+          <li>
+            <a
+              href="/notes"
+              class={currentPath.startsWith("/notes") ? "active" : ""}>garden</a
+            >
+          </li>
+          <li>
+            <a
+              href="/workbench"
+              class={currentPath === "/workbench" ? "active" : ""}>work</a
+            >
+          </li>
+          <li>
+            <a href="/bio" class={currentPath === "/bio" ? "active" : ""}
+              >about</a
+            >
+          </li>
+        </ul>
+      </nav>
 
-    <main id="main-content" role="main">
-      <slot />
-    </main>
-
-    <a
-      href="#body"
-      class="back-to-top page-scroll"
-      id="btt-button"
-      aria-label="Back to top"
-    >
-      <Icon name="arrow-up" />
-    </a>
-
+      <main id="main-content" role="main">
+        <slot />
+      </main>
+      <a
+        href="#body"
+        class="back-to-top page-scroll"
+        id="btt-button"
+        aria-label="Back to top"
+      >
+        <Icon name="arrow-up" />
+      </a>
+    </div>
     <!-- Scripts -->
     <script src="../scripts/scripts.js"></script>
     {

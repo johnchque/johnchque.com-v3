@@ -44,7 +44,7 @@
 /* Theme settings - UNIFIED SYSTEM */
 [data-bs-theme="white"] {
   --body-bg: #f9f9f9;
-  --body-color: #111;
+  --body-color: #141414;
   --link-color: var(--primary);
   --link-hover: #5a9aad;
   --highlight: var(--primary);
@@ -62,7 +62,7 @@
 [data-bs-theme="dark"] {
   color-scheme: dark;
   --body-bg: #151616;
-  --body-color: #f3f4f6;
+  --body-color: #ececec;
   --link-color: var(--tertiary);
   --link-hover: #c59667;
   --highlight: var(--tertiary);
@@ -135,10 +135,10 @@ html {
   width: 100%;
   height: 100%;
   margin: 0;
-  font-size: 19px;
+  font-size: 14px;
   font-family: var(--font-body);
   background-color: var(--light);
-  color: var(--dark);
+  color: var(--body-color);
 }
 
 h1,
@@ -192,10 +192,6 @@ a.dark {
 /* ==========================================
    LAYOUT & UTILITIES
    ========================================== */
-.ml-top-padding {
-  padding-top: 120px;
-}
-
 .container-md {
   max-width: 64rem;
 }
@@ -341,7 +337,7 @@ footer .social-icons ul li {
    THEME EFFECTS & ANIMATIONS - UNIFIED SYSTEM
    ========================================== */
 main {
-  margin: 0 auto;
+  // margin: 0 auto;
   isolation: isolate;
 }
 
@@ -664,7 +660,7 @@ body {
 
   html,
   body {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   h1 {
@@ -681,10 +677,6 @@ body {
 
   body {
     font-size: 1.2rem;
-  }
-
-  .ml-top-padding {
-    padding-top: 60px;
   }
 
   #progressive-blur>div:nth-child(2) {
@@ -785,4 +777,77 @@ p.subtitle {
 /* Loaded state */
 .video-embed.loaded .video-embed-preview {
   display: none;
+}
+
+.layout {
+  display: flex;
+  padding: 96px;
+}
+
+.sidebar {
+  margin-right: 48px;
+  text-align: end;
+  max-width: 100px;
+}
+
+.sidebar ul {
+  position: sticky;
+  top: 96px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  font-style: italic;
+  font-size: 14px;
+  transition: color 0.15s ease;
+  display: inline-block;
+  opacity: 0.7;
+}
+
+.sidebar a.active {
+  opacity: 1;
+  font-weight: 400;
+}
+
+main {
+  flex: 1;
+  max-width: 693px;
+  padding-left: 48px;
+  text-align: justify;
+}
+
+pre {
+  padding: 5px 10px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 20px 10px;
+    max-width: 100%;
+  }
+
+  .sidebar ul {
+    position: relative;
+    top: 0;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .layout {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  main {
+    padding-left: 0;
+  }
 }

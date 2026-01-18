@@ -8,43 +8,45 @@ category: Learning
 ---
 
 ## Introduction
+
 - What are hooks?
-	- Allow you to use react features without writing a class.
-	- Hooks don't work inside classes.
+ 	- Allow you to use react features without writing a class.
+ 	- Hooks don't work inside classes.
 - Why hooks?
-	- Set 1
-		- In JS, we need to understand how *this* keyword works.
-		- In JS, we need to remember to bind event handlers in class components.
-		- Classes don't minify very well.
-		- With hooks we don't face these problems anymore because we are not working with classes.
-	- Set 2
-		- There is no way to reuse stateful component logic.
-		- There is a need to share stateful logic without chaning component hierarchy.
-	- Set 3
-		- Code is not organised for complex scenarios.
-		- Data fetching and event listeners end up in the same code block.
+ 	- Set 1
+  		- In JS, we need to understand how *this* keyword works.
+  		- In JS, we need to remember to bind event handlers in class components.
+  		- Classes don't minify very well.
+  		- With hooks we don't face these problems anymore because we are not working with classes.
+ 	- Set 2
+  		- There is no way to reuse stateful component logic.
+  		- There is a need to share stateful logic without chaning component hierarchy.
+ 	- Set 3
+  		- Code is not organised for complex scenarios.
+  		- Data fetching and event listeners end up in the same code block.
 - Summary
-	- Hooks were introduced in 16.8
-	- Hooks avoid the confusion with the this keyword.
-	- Hooks allow to reuse stateful logic.
-	- Hooks organise logic inside a component into reusable units.
+ 	- Hooks were introduced in 16.8
+ 	- Hooks avoid the confusion with the this keyword.
+ 	- Hooks allow to reuse stateful logic.
+ 	- Hooks organise logic inside a component into reusable units.
 
 ## useState
+
 - Allows to use state within functional components.
 - A simple counter
 
 ```js
 function HookCounter() {
-	// Array destructuring.
-	const [count, setCount] = useState(0);
+ // Array destructuring.
+ const [count, setCount] = useState(0);
 
-	return (
-		<div>
-			<button onClick={() => setCount(count + 1)}>
-				Count {count}
-			</button>
-		</div>
-	)
+ return (
+  <div>
+   <button onClick={() => setCount(count + 1)}>
+    Count {count}
+   </button>
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -54,30 +56,32 @@ export default HookCounter;
 - The default value is never used in rerenders.
 
 ### Rules of hooks
+
 - Only call hooks at the top level.
 - Don't call hooks inside loops, conditions, or nested functions.
 - Only call hook from React functions. (Functional react components).
 
 ## useState with previous state
+
 - A counter for incrementing, decrementing and resetting.
 
 ```js
 function HookCounter() {
-	const initialCount = 0;
-	const [count, setCount] = useState(0);
+ const initialCount = 0;
+ const [count, setCount] = useState(0);
 
-	return (
-		<div>
-			Count: {count}
-			<button onClick={() => setCount(initialCount)}>Reset</button>
-			<button onClick={() => setCount(count + 1)}>
-				Increment
-			</button>
-			<button onClick={() => setCount(count - 1)}>
-				Increment
-			</button>
-		</div>
-	)
+ return (
+  <div>
+   Count: {count}
+   <button onClick={() => setCount(initialCount)}>Reset</button>
+   <button onClick={() => setCount(count + 1)}>
+    Increment
+   </button>
+   <button onClick={() => setCount(count - 1)}>
+    Increment
+   </button>
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -88,7 +92,7 @@ export default HookCounter;
 
 ```js
 const incrementFive = () => {
-	setCount(prevCount => prevCount + 5);
+ setCount(prevCount => prevCount + 5);
 }
 ```
 
@@ -96,32 +100,32 @@ const incrementFive = () => {
 
 ```js
 function HookCounter() {
-	const initialCount = 0;
-	const [count, setCount] = useState(0);
+ const initialCount = 0;
+ const [count, setCount] = useState(0);
 
-	return (
-		<div>
-			Count: {count}
-			<button onClick={() => setCount(initialCount)}>Reset</button>
-			<button onClick={() => setCount(count + 1)}>
-				Increment
-			</button>
-			<button onClick={() => setCount(count - 1)}>
-				Increment
-			</button>
-			<button onClick={() => setCount(prevCount => prevCount + 5)}>
-			Increment 5
-			</button>
-		</div>
-	)
+ return (
+  <div>
+   Count: {count}
+   <button onClick={() => setCount(initialCount)}>Reset</button>
+   <button onClick={() => setCount(count + 1)}>
+    Increment
+   </button>
+   <button onClick={() => setCount(count - 1)}>
+    Increment
+   </button>
+   <button onClick={() => setCount(prevCount => prevCount + 5)}>
+   Increment 5
+   </button>
+  </div>
+ )
 }
 
 export default HookCounter;
 ```
 
 - This approach is more safe because:
-	- Since state updates are async, then setCount(count + 5) would use the current value of count at the time of rendering. Not necessarily the most recent value.
-	- If multiple states updates are made, the first approach may end up using stale values.
+ 	- Since state updates are async, then setCount(count + 5) would use the current value of count at the time of rendering. Not necessarily the most recent value.
+ 	- If multiple states updates are made, the first approach may end up using stale values.
 - Functional updates ensure we are always using the most current state value.
 - The second approach is preferred to state updates that depend on the previous value.
 
@@ -129,18 +133,18 @@ export default HookCounter;
 
 ```js
 function HookCounter() {
-	const [name, setName] = useState({firstName: '', lastName: ''});
+ const [name, setName] = useState({firstName: '', lastName: ''});
 
-	return (
-		<div>
-			<form>
-				<input type="text" value={name.firstName} onChange={e => setName({...name, firstName: e.target.value})/>
-				<input type="text" value={name.lastName} onChange={e => setName({...name, lastName: e.target.value})/>
-				<h2>First name: {name.firstName}</h2>
-				<h2>Last name: {name.lastName}</h2>
-			</form>
-		</div>
-	)
+ return (
+  <div>
+   <form>
+    <input type="text" value={name.firstName} onChange={e => setName({...name, firstName: e.target.value})/>
+    <input type="text" value={name.lastName} onChange={e => setName({...name, lastName: e.target.value})/>
+    <h2>First name: {name.firstName}</h2>
+    <h2>Last name: {name.lastName}</h2>
+   </form>
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -154,27 +158,27 @@ export default HookCounter;
 
 ```js
 function HookCounter() {
-	const [items, setItems] = useState([]);
+ const [items, setItems] = useState([]);
 
-	const addItems = () => {
-		setItems([...items, {
-			id: items.length,
-			value: Math.floor(Marh.random() * 10) + 1
-		}])
-	}
+ const addItems = () => {
+  setItems([...items, {
+   id: items.length,
+   value: Math.floor(Marh.random() * 10) + 1
+  }])
+ }
 
-	return (
-		<div>
-			<button onClick={addItem}>Add a number</button>
-			<ul>
-				{
-					items.map(item => (
-						<li key={item.di}>{item.value}</li>
-					))
-				}
-			</ul>
-		</div>
-	)
+ return (
+  <div>
+   <button onClick={addItem}>Add a number</button>
+   <ul>
+    {
+     items.map(item => (
+      <li key={item.di}>{item.value}</li>
+     ))
+    }
+   </ul>
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -184,6 +188,7 @@ export default HookCounter;
 - The useState hook returns an array with 2 elements, the current value and the setter for it.
 
 ## useEffect
+
 - Let's us perform side effects in functional components.
 - A replacement for componentDitMount, componentDidUpdate, and componentWillUnmount.
 
@@ -191,20 +196,20 @@ export default HookCounter;
 
 ```js
 function HookCounter() {
-	const [count, setCount] = useState(0);
+ const [count, setCount] = useState(0);
 
-	useEffect(() => {
-		document.title = `${count} times`;
-	});
+ useEffect(() => {
+  document.title = `${count} times`;
+ });
 
-	return (
-		<div>
-			Count: {count}
-			<button onClick={() => setCount(prevCount => prevCount + 1)}>
-				Click {count} times
-			</button>
-		</div>
-	)
+ return (
+  <div>
+   Count: {count}
+   <button onClick={() => setCount(prevCount => prevCount + 1)}>
+    Click {count} times
+   </button>
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -219,22 +224,22 @@ export default HookCounter;
 
 ```js
 function HookCounter() {
-	const [count, setCount] = useState(0);
-	const [name, setName] = useState("");
+ const [count, setCount] = useState(0);
+ const [name, setName] = useState("");
 
-	useEffect(() => {
-		console.log("Updating name value");
-		document.title = `${count} times`;
-	}, [count]);
+ useEffect(() => {
+  console.log("Updating name value");
+  document.title = `${count} times`;
+ }, [count]);
 
-	return (
-		<div>
-			<input type="text" value={name} onChange={e => setName(e.target.value)}></input>
-			<button onClick={() => setCount(prevCount => prevCount + 1)}>
-				Click {count} times
-			</button>
-		</div>
-	)
+ return (
+  <div>
+   <input type="text" value={name} onChange={e => setName(e.target.value)}></input>
+   <button onClick={() => setCount(prevCount => prevCount + 1)}>
+    Click {count} times
+   </button>
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -247,29 +252,29 @@ export default HookCounter;
 
 ```js
 function HookCounter() {
-	const [x, setX] = useState(0);
-	const [y, setY] = useState(0);
+ const [x, setX] = useState(0);
+ const [y, setY] = useState(0);
 
-	const logMousePosition = e => {
-		console.log('Mouse event');
-		setX(e.clientX);
-		setY(e.clientY);
-	}
+ const logMousePosition = e => {
+  console.log('Mouse event');
+  setX(e.clientX);
+  setY(e.clientY);
+ }
 
-	useEffect(() => {
-		console.log("useEffect called");
-		window.addEventListener('mousemove', logMousePosition);
-		// Add a cleanup to prevent memory leaks.
-		return () => {
-			window.removeEventListener('mousemove', logMousePosition);
-		}
-	}, []);
+ useEffect(() => {
+  console.log("useEffect called");
+  window.addEventListener('mousemove', logMousePosition);
+  // Add a cleanup to prevent memory leaks.
+  return () => {
+   window.removeEventListener('mousemove', logMousePosition);
+  }
+ }, []);
 
-	return (
-		<div>
-			Hooks X {x} - Y {y}
-		</div>
-	)
+ return (
+  <div>
+   Hooks X {x} - Y {y}
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -279,18 +284,19 @@ export default HookCounter;
 - This replaces componentDidMount.
 
 ## useEffect with cleanup
+
 - Replaces componentDidMount from class components.
 
 ```js
 function HookCounter() {
-	const [display, setDisplay] = useState(true);
+ const [display, setDisplay] = useState(true);
 
-	return (
-		<div>
-			<button onClick={() => setDisplay(!display)}>Toggle display</button>
-			{display && <hookMouse />}
-		</div>
-	)
+ return (
+  <div>
+   <button onClick={() => setDisplay(!display)}>Toggle display</button>
+   {display && <hookMouse />}
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -301,17 +307,17 @@ export default HookCounter;
 - The returned function will be executed when the component will unmount.
 
 ```js
-	...
-	useEffect(() => {
-		console.log("useEffect called");
-		window.addEventListener('mousemove', logMousePosition);
-		// Add a cleanup to prevent memory leaks.
-		return () => {
-			console.log("Component unmounting called");
-			window.removeEventListener('mousemove', logMousePosition);
-		}
-	}, []);
-	...
+ ...
+ useEffect(() => {
+  console.log("useEffect called");
+  window.addEventListener('mousemove', logMousePosition);
+  // Add a cleanup to prevent memory leaks.
+  return () => {
+   console.log("Component unmounting called");
+   window.removeEventListener('mousemove', logMousePosition);
+  }
+ }, []);
+ ...
 ```
 
 - The cleanup code can be cancelling subscriptions, timers, or removing event handlers.
@@ -320,24 +326,24 @@ export default HookCounter;
 
 ```js
 function HookCounter() {
-	const [count, setCount] = useState(0);
+ const [count, setCount] = useState(0);
 
-	const tick = () => {
-		setCount(count + 1)
-	}
+ const tick = () => {
+  setCount(count + 1)
+ }
 
-	useEffect(() => {
-		const interval = setInterval(tick, 1000);
-		return () => {
-			clearInterval(interval);	
-		}
-	}, [mount])
+ useEffect(() => {
+  const interval = setInterval(tick, 1000);
+  return () => {
+   clearInterval(interval); 
+  }
+ }, [mount])
 
-	return (
-		<div>
-			{count}
-		</div>
-	)
+ return (
+  <div>
+   {count}
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -349,24 +355,24 @@ export default HookCounter;
 
 ```js
 function HookCounter() {
-	const [count, setCount] = useState(0);
+ const [count, setCount] = useState(0);
 
-	const tick = () => {
-		setCount(prevCount => prevCount + 1)
-	}
+ const tick = () => {
+  setCount(prevCount => prevCount + 1)
+ }
 
-	useEffect(() => {
-		const interval = setInterval(tick, 1000);
-		return () => {
-			clearInterval(interval);	
-		}
-	}, [])
+ useEffect(() => {
+  const interval = setInterval(tick, 1000);
+  return () => {
+   clearInterval(interval); 
+  }
+ }, [])
 
-	return (
-		<div>
-			{count}
-		</div>
-	)
+ return (
+  <div>
+   {count}
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -378,35 +384,35 @@ export default HookCounter;
 
 ```js
 function HookCounter() {
-	const [count, setCount] = useState(0);
+ const [count, setCount] = useState(0);
 
-	const tick = () => {
-		setCount(prevCount => prevCount + 1)
-	}
+ const tick = () => {
+  setCount(prevCount => prevCount + 1)
+ }
 
-	function doSomething() {
-		console.log(someProp);
-	}
+ function doSomething() {
+  console.log(someProp);
+ }
 
-	useEffect(() => {
-		const interval = setInterval(tick, 1000);
-		return () => {
-			clearInterval(interval);	
-		}
-	}, [someProp])
+ useEffect(() => {
+  const interval = setInterval(tick, 1000);
+  return () => {
+   clearInterval(interval); 
+  }
+ }, [someProp])
 
-	return (
-		<div>
-			{count}
-		</div>
-	)
+ return (
+  <div>
+   {count}
+  </div>
+ )
 }
 
 export default HookCounter;
 ```
 
 - When you need a function that needs to be called inside useEffect is better to define it INSIDE useEffect.
-	- Actual issue is not with Closure, but with how states are managed by React. Closure means that the inner (child) function has access to the outer (parent) function's variables, even after the outer function has finished executing. Importantly, this access is through a reference, meaning the function should always have access to the latest values. Therefore, closure alone cannot be the reason why tick has access to stale values. In React, however, state is immutable. When the setter function (setCount) is called, React creates a new state value rather than modifying the existing one. In our example, we are never actually changing the value of the initial count state (the one captured by tick). Instead, React is creating a new state instance. As a result, even though closures ensure that functions retain a reference to variables, tick continues to reference the original state value from when it was first created. The actual issue is not that the value is stale, but that the reference itself is stale.
+ 	- Actual issue is not with Closure, but with how states are managed by React. Closure means that the inner (child) function has access to the outer (parent) function's variables, even after the outer function has finished executing. Importantly, this access is through a reference, meaning the function should always have access to the latest values. Therefore, closure alone cannot be the reason why tick has access to stale values. In React, however, state is immutable. When the setter function (setCount) is called, React creates a new state value rather than modifying the existing one. In our example, we are never actually changing the value of the initial count state (the one captured by tick). Instead, React is creating a new state instance. As a result, even though closures ensure that functions retain a reference to variables, tick continues to reference the original state value from when it was first created. The actual issue is not that the value is stale, but that the reference itself is stale.
 
 ## Fetching data with useEffect
 
@@ -417,29 +423,29 @@ npm install axios
 ```js
 function DataFetching() {
 
-	const [posts, setPosts] = useState([]);
+ const [posts, setPosts] = useState([]);
 
-	useEffect(() => {
-		axios.get('url...')
-			.then(res => {
-				console.log(res);
-				setPosts(res.data);
-			})
-			.catch(err => {
-				console.log(err);
-			})
-	}, [])
-	return (
-		<div>
-			<ul>
-				{
-					posts.map(post => (
-						<li key={post.id}>{post.title}</li>
-					))
-				}
-			</ul>
-		</div>
-	)
+ useEffect(() => {
+  axios.get('url...')
+   .then(res => {
+    console.log(res);
+    setPosts(res.data);
+   })
+   .catch(err => {
+    console.log(err);
+   })
+ }, [])
+ return (
+  <div>
+   <ul>
+    {
+     posts.map(post => (
+      <li key={post.id}>{post.title}</li>
+     ))
+    }
+   </ul>
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -450,26 +456,26 @@ How to fetch individual posts?
 ```js
 function DataFetching() {
 
-	const [post, setPost] = useState({});
-	const [id, setId] = useState(1);
+ const [post, setPost] = useState({});
+ const [id, setId] = useState(1);
 
-	useEffect(() => {
-		axios.get(`/posts/${id}`)
-			.then(res => {
-				console.log(res);
-				setPost(res.data);
-			})
-			.catch(err => {
-				console.log(err);
-			})
-	}, [id])
+ useEffect(() => {
+  axios.get(`/posts/${id}`)
+   .then(res => {
+    console.log(res);
+    setPost(res.data);
+   })
+   .catch(err => {
+    console.log(err);
+   })
+ }, [id])
 
-	return (
-		<div>
-			<input type="text" value={id} onChange={e => setId(e.target.value)}/>
-			<div>{post.title}</div>
-		</div>
-	)
+ return (
+  <div>
+   <input type="text" value={id} onChange={e => setId(e.target.value)}/>
+   <div>{post.title}</div>
+  </div>
+ )
 }
 
 export default HookCounter;
@@ -480,39 +486,39 @@ How to trigger a request on a button click?
 ```js
 function DataFetching() {
 
-	const [post, setPost] = useState({});
-	const [id, setId] = useState(1);
-	const [idFromButtonClick, setIdFromButtonClick] = useState(1);
+ const [post, setPost] = useState({});
+ const [id, setId] = useState(1);
+ const [idFromButtonClick, setIdFromButtonClick] = useState(1);
 
-	const handleClick = () => {
-		setIdFromButtonClick(id);
-	}
+ const handleClick = () => {
+  setIdFromButtonClick(id);
+ }
 
-	useEffect(() => {
-		axios.get(`/posts/${idFromButtonClick}`)
-			.then(res => {
-				console.log(res);
-				setPost(res.data);
-			})
-			.catch(err => {
-				console.log(err);
-			})
-	}, [idFromButtonClick])
+ useEffect(() => {
+  axios.get(`/posts/${idFromButtonClick}`)
+   .then(res => {
+    console.log(res);
+    setPost(res.data);
+   })
+   .catch(err => {
+    console.log(err);
+   })
+ }, [idFromButtonClick])
 
-	return (
-		<div>
-			<input type="text" value={id} onChange={e => setId(e.target.value)}/>
-			<button type="button" onClick={handleClick}>Fetch post</button>
-			<div>{post.title}</div>
-		</div>
-	)
+ return (
+  <div>
+   <input type="text" value={id} onChange={e => setId(e.target.value)}/>
+   <button type="button" onClick={handleClick}>Fetch post</button>
+   <div>{post.title}</div>
+  </div>
+ )
 }
 
 export default HookCounter;
 ```
 
 ## useContext
-https://www.youtube.com/watch?v=CI7EYWmRDJE&list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A&index=15
+<https://www.youtube.com/watch?v=CI7EYWmRDJE&list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A&index=15>
 
 - In a react application with a lot of components with different levels.
 - The requirement would be that the deep nested components need to show the username.
@@ -526,37 +532,36 @@ https://www.youtube.com/watch?v=CI7EYWmRDJE&list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3
 export const UserContext = React.createContext();
 ```
 
-
 - Second step is to provide this context with a value.
-	- This provider must wrap the children components for the value to be available.
+ 	- This provider must wrap the children components for the value to be available.
 
 ```ts
 // App.js
 <UserContext.Provider value={"John"}>
-	<ComponentExample />
+ <ComponentExample />
 </UserContext.Provider>
 ```
 
-- 3. The third step is to consume the context value.
-	- We have to make use of the render props pattern.
-	- The context provides use with the username.
+- 1. The third step is to consume the context value.
+ 	- We have to make use of the render props pattern.
+ 	- The context provides use with the username.
 
 ```ts
 // ComponentExample.js
 import {UserContext} from "../App";
 
 function ComponentExample() {
-	return (
-		<div>
-			<UserContext.Consumer>
-				{
-					user => {
-						return <div>User: {user}</div>
-					}
-				}
-			</UserContext.Consumer>
-		</div>
-	)
+ return (
+  <div>
+   <UserContext.Consumer>
+    {
+     user => {
+      return <div>User: {user}</div>
+     }
+    }
+   </UserContext.Consumer>
+  </div>
+ )
 }
 ```
 
@@ -565,9 +570,9 @@ function ComponentExample() {
 ```ts
 // App.js
 <UserContext.Provider value={"John"}>
-	<ChannelContext.Provider value={"Example"}>
-		<ComponentExample />
-	</ChannelContext.Provider>
+ <ChannelContext.Provider value={"Example"}>
+  <ComponentExample />
+ </ChannelContext.Provider>
 </UserContext.Provider>
 ```
 
@@ -577,25 +582,25 @@ import {UserContext} from "../App";
 import {ChannelContext} from "../App";
 
 function ComponentExample() {
-	return (
-		<div>
-			<UserContext.Consumer>
-				{
-					user => {
-						return (
-							<ChannelContext.Consumer>
-								{
-									channel => {
-										return <div>User: {user}, {channel}</div>
-									}
-								}
-							</ChannelContext.Consumer>
-						)
-					}
-				}
-			</UserContext.Consumer>
-		</div>
-	)
+ return (
+  <div>
+   <UserContext.Consumer>
+    {
+     user => {
+      return (
+       <ChannelContext.Consumer>
+        {
+         channel => {
+          return <div>User: {user}, {channel}</div>
+         }
+        }
+       </ChannelContext.Consumer>
+      )
+     }
+    }
+   </UserContext.Consumer>
+  </div>
+ )
 }
 ```
 
@@ -609,31 +614,32 @@ import {UserContext, ChannelContext} from "../App";
 
 function ComponentExample() {
 
-	const user = useContext(UserContext);
-	const channel = useContext(ChannelContext);
+ const user = useContext(UserContext);
+ const channel = useContext(ChannelContext);
 
-	return (
-		<div>
-			{user} - {channel}
-		</div>
-	)
+ return (
+  <div>
+   {user} - {channel}
+  </div>
+ )
 }
 ```
 
 ## useReducer
+
 - It is a hook used for state management. It is an alternative to useState.
 - useReduce was used to build useState. It is more primitive.
 - Reducers
-	- Let's say we have an array of 4 elements.
-	- Then we have a reducer that gets 2 parameters and sums them both.
-	- A reducer gets 2 parameters, does some operation and returns them as a single value.
-	- useReducer(reducer, initialState);
+ 	- Let's say we have an array of 4 elements.
+ 	- Then we have a reducer that gets 2 parameters and sums them both.
+ 	- A reducer gets 2 parameters, does some operation and returns them as a single value.
+ 	- useReducer(reducer, initialState);
 - Let's implement a counter.
 
 ```ts
 function App() {
-	return <div className="App">
-	</div>
+ return <div className="App">
+ </div>
 }
 ```
 
@@ -642,19 +648,19 @@ function App() {
 
 const initialState = 0;
 const reducer (state, action) => {
-	
-	return newState;
+ 
+ return newState;
 }
 
 function CounterOne() {
-	useReducer(reducer, initialState);
-	return (
-		<div>
-			<button>Increment</button>
-			<button>Decrement</button>
-			<button>Reset</button>
-		</div>
-	)
+ useReducer(reducer, initialState);
+ return (
+  <div>
+   <button>Increment</button>
+   <button>Decrement</button>
+   <button>Reset</button>
+  </div>
+ )
 }
 ```
 
