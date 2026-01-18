@@ -127,12 +127,14 @@ const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
           <li>
             <a
               href="/workbench"
-              class={currentPath === "/workbench" ? "active" : ""}>work</a
+              class={currentPath.startsWith("/workbench") ? "active" : ""}
+              >work</a
             >
           </li>
           <li>
-            <a href="/bio" class={currentPath === "/bio" ? "active" : ""}
-              >about</a
+            <a
+              href="/bio"
+              class={currentPath.startsWith("/bio") ? "active" : ""}>about</a
             >
           </li>
         </ul>
