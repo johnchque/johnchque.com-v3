@@ -657,28 +657,6 @@ body {
 }
 
 @media (max-width: 800px) {
-
-  html,
-  body {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 2.4rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-  }
-
-  body {
-    font-size: 1.2rem;
-  }
-
   #progressive-blur>div:nth-child(2) {
     --blur-amount: 36px;
   }
@@ -694,13 +672,6 @@ body {
     max-width: 100%;
   }
 }
-
-/* .img-fluid {
-  margin-left: -25%;
-  margin-right: -25%;
-  width: 150%;
-  max-width: 150%;
-} */
 
 p.subtitle {
   font-style: italic;
