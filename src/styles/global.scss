@@ -82,14 +82,6 @@
    FONTS & BASE ELEMENTS
    ========================================== */
 @font-face {
-  font-family: "Signature";
-  src: url("/assets/fonts/royalty_free.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Libre Baskerville";
   font-style: normal;
   font-weight: 400;
@@ -120,14 +112,6 @@
   font-weight: 400;
   font-display: block;
   src: url("/assets/fonts/Literata.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Crimson Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/assets/fonts/CrimsonPro.ttf") format("truetype");
 }
 
 body,
