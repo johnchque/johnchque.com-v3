@@ -28,6 +28,9 @@ const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
     <meta name="author" content="John Choque" />
     {description && <meta name="description" content={description} />}
 
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
+
     <!-- CRITICAL: Anti-flash script - must be first -->
     <script is:inline>
       (function () {
@@ -39,9 +42,6 @@ const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
         document.documentElement.setAttribute("data-bs-theme", theme);
       })();
     </script>
-
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" />
 
     <!-- Performance: Preload critical fonts -->
     <link
