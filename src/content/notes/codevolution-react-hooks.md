@@ -10,25 +10,25 @@ category: Learning
 ## Introduction
 
 - What are hooks?
- 	- Allow you to use react features without writing a class.
- 	- Hooks don't work inside classes.
+  - Allow you to use react features without writing a class.
+  - Hooks don't work inside classes.
 - Why hooks?
- 	- Set 1
-  		- In JS, we need to understand how *this* keyword works.
-  		- In JS, we need to remember to bind event handlers in class components.
-  		- Classes don't minify very well.
-  		- With hooks we don't face these problems anymore because we are not working with classes.
- 	- Set 2
-  		- There is no way to reuse stateful component logic.
-  		- There is a need to share stateful logic without chaning component hierarchy.
- 	- Set 3
-  		- Code is not organised for complex scenarios.
-  		- Data fetching and event listeners end up in the same code block.
+  - Set 1
+    - In JS, we need to understand how *this* keyword works.
+    - In JS, we need to remember to bind event handlers in class components.
+    - Classes don't minify very well.
+    - With hooks we don't face these problems anymore because we are not working with classes.
+  - Set 2
+    - There is no way to reuse stateful component logic.
+    - There is a need to share stateful logic without chaning component hierarchy.
+  - Set 3
+    - Code is not organised for complex scenarios.
+    - Data fetching and event listeners end up in the same code block.
 - Summary
- 	- Hooks were introduced in 16.8
- 	- Hooks avoid the confusion with the this keyword.
- 	- Hooks allow to reuse stateful logic.
- 	- Hooks organise logic inside a component into reusable units.
+  - Hooks were introduced in 16.8
+  - Hooks avoid the confusion with the this keyword.
+  - Hooks allow to reuse stateful logic.
+  - Hooks organise logic inside a component into reusable units.
 
 ## useState
 
@@ -124,8 +124,8 @@ export default HookCounter;
 ```
 
 - This approach is more safe because:
- 	- Since state updates are async, then setCount(count + 5) would use the current value of count at the time of rendering. Not necessarily the most recent value.
- 	- If multiple states updates are made, the first approach may end up using stale values.
+  - Since state updates are async, then setCount(count + 5) would use the current value of count at the time of rendering. Not necessarily the most recent value.
+  - If multiple states updates are made, the first approach may end up using stale values.
 - Functional updates ensure we are always using the most current state value.
 - The second approach is preferred to state updates that depend on the previous value.
 
@@ -412,7 +412,7 @@ export default HookCounter;
 ```
 
 - When you need a function that needs to be called inside useEffect is better to define it INSIDE useEffect.
- 	- Actual issue is not with Closure, but with how states are managed by React. Closure means that the inner (child) function has access to the outer (parent) function's variables, even after the outer function has finished executing. Importantly, this access is through a reference, meaning the function should always have access to the latest values. Therefore, closure alone cannot be the reason why tick has access to stale values. In React, however, state is immutable. When the setter function (setCount) is called, React creates a new state value rather than modifying the existing one. In our example, we are never actually changing the value of the initial count state (the one captured by tick). Instead, React is creating a new state instance. As a result, even though closures ensure that functions retain a reference to variables, tick continues to reference the original state value from when it was first created. The actual issue is not that the value is stale, but that the reference itself is stale.
+  - Actual issue is not with Closure, but with how states are managed by React. Closure means that the inner (child) function has access to the outer (parent) function's variables, even after the outer function has finished executing. Importantly, this access is through a reference, meaning the function should always have access to the latest values. Therefore, closure alone cannot be the reason why tick has access to stale values. In React, however, state is immutable. When the setter function (setCount) is called, React creates a new state value rather than modifying the existing one. In our example, we are never actually changing the value of the initial count state (the one captured by tick). Instead, React is creating a new state instance. As a result, even though closures ensure that functions retain a reference to variables, tick continues to reference the original state value from when it was first created. The actual issue is not that the value is stale, but that the reference itself is stale.
 
 ## Fetching data with useEffect
 
@@ -518,6 +518,7 @@ export default HookCounter;
 ```
 
 ## useContext
+
 <https://www.youtube.com/watch?v=CI7EYWmRDJE&list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A&index=15>
 
 - In a react application with a lot of components with different levels.
@@ -533,7 +534,7 @@ export const UserContext = React.createContext();
 ```
 
 - Second step is to provide this context with a value.
- 	- This provider must wrap the children components for the value to be available.
+  - This provider must wrap the children components for the value to be available.
 
 ```ts
 // App.js
@@ -542,9 +543,9 @@ export const UserContext = React.createContext();
 </UserContext.Provider>
 ```
 
-- 1. The third step is to consume the context value.
- 	- We have to make use of the render props pattern.
- 	- The context provides use with the username.
+- 3. The third step is to consume the context value.
+  - We have to make use of the render props pattern.
+  - The context provides use with the username.
 
 ```ts
 // ComponentExample.js
@@ -630,10 +631,10 @@ function ComponentExample() {
 - It is a hook used for state management. It is an alternative to useState.
 - useReduce was used to build useState. It is more primitive.
 - Reducers
- 	- Let's say we have an array of 4 elements.
- 	- Then we have a reducer that gets 2 parameters and sums them both.
- 	- A reducer gets 2 parameters, does some operation and returns them as a single value.
- 	- useReducer(reducer, initialState);
+  - Let's say we have an array of 4 elements.
+  - Then we have a reducer that gets 2 parameters and sums them both.
+  - A reducer gets 2 parameters, does some operation and returns them as a single value.
+  - useReducer(reducer, initialState);
 - Let's implement a counter.
 
 ```ts

@@ -7,11 +7,13 @@ category: Learning
 ---
 
 To install an older version of the sdk
+
 ```sh
 npx create-expo-app fe --template tabs@sdk-53
 ```
 
 To connect from the terminal
+
 ```sh
 psql postgres://jo...
 ```

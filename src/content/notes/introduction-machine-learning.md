@@ -470,6 +470,8 @@ What is Machine Learning?
     - Use a gradient checking to compare the derivative we got with the numerical estimate of gradient. This will allow us to check that our backpropagation is correct.
     - Use an optimization algorithm to minimize the cost function as a function of parameters theta.
 
+- ## Autonomous driving example
+
 ### Support vector machines
 
 - Optimization objective
@@ -677,11 +679,11 @@ What is Machine Learning?
       - = $\Pi_{j=1}^n p(x_j;\mu_j,\sigma_j^2)$, the product of p, parametrized by miu and sigma.
   - Anomaly detection algorithm
     - 1. Choose features xi that might be indicative of anomalous examples. That describe general properties.
-    - 1. Given the training set, fit the parameters mu1, ...mun, sigma21...sigma2n. It is also possible to come with vectorized versions.
+    - 2. Given the training set, fit the parameters mu1, ...mun, sigma21...sigma2n. It is also possible to come with vectorized versions.
 
       - $\mu_j=\frac1m\sum^m_{i=1}x_j^{(2)}$, average value of the j feature.
       - $\sigma^2_j = \frac1m\sum^m_{i=1}(x_j^{(i)}-\mu_j)^2$,
-    - 1. Given new example x, compute p(x) probability of the new example.
+    - 3. Given new example x, compute p(x) probability of the new example.
 
       - If p(x)< epsilon, you don’t flag this as a Gaussian anomally.
   - Example

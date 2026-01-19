@@ -14,7 +14,7 @@ A syntax to request or mutate data. An alternative to REST API.
 We still use http requests but gives us more flexibility.
 REST API:
 
-```
+```sh
 website.com/api/animal
 website.com/api/animal/123 // Fetch a single element.
 ```
@@ -27,7 +27,7 @@ Problems
 GraphQL
 Request to a single endpoint.
 
-```
+```sh
 website.com/graphql
 ```
 
