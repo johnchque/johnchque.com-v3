@@ -2,6 +2,7 @@
 import Background from "../components/Background.astro";
 import "../styles/global.scss";
 import { Icon } from "astro-icon/components";
+import literataFont from "../assets/fonts/Literata.woff2";
 
 interface Props {
   title?: string;
@@ -46,14 +47,7 @@ const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
     <!-- Performance: Preload critical fonts -->
     <link
       rel="preload"
-      href="/assets/fonts/libre-baskerville-400.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/assets/fonts/Literata.woff2"
+      href={literataFont}
       as="font"
       type="font/woff2"
       crossorigin
