@@ -23,6 +23,7 @@ $enable-shadows: false;
 @import "bootstrap/scss/type"; // Typography
 @import "bootstrap/scss/containers"; // .container-lg
 @import "bootstrap/scss/grid"; // .row, .col-*
+@import "bootstrap/scss/buttons";
 
 // 7. Utilities
 @import "bootstrap/scss/utilities/api"; // Generates spacing utilities (mb-5, my-5, etc.)

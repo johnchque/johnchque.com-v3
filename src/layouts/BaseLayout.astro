@@ -99,9 +99,14 @@ const ogImage = `${siteUrl}/og-image.jpg`; // Add your actual OG image
       <nav class="sidebar">
         <ul>
           <li>
-            <a class="page-scroll" href="#" id="btnSwitch"
-              ><Icon name="moon" /></a
+            <button
+              type="button"
+              class="page-scroll btn btn-link emphasis p-0"
+              id="btnSwitch"
+              aria-label="Toggle dark mode"
             >
+              <Icon name="moon" aria-hidden="true" />
+            </button>
           </li>
           <li>
             <a href="/" class={currentPath === "/" ? "active" : ""}>home</a>
