@@ -20,8 +20,10 @@ function initAutoGallery() {
 
         const link = document.createElement('a');
         link.href = fullSrc;
-        link.setAttribute('data-pswp-width', img.naturalWidth);
-        link.setAttribute('data-pswp-height', img.naturalHeight);
+        if (img.complete && img.naturalWidth) {
+            link.setAttribute('data-pswp-width', img.naturalWidth);
+            link.setAttribute('data-pswp-height', img.naturalHeight);
+        }
 
         if (img.alt) {
             link.setAttribute('data-pswp-caption', img.alt);
