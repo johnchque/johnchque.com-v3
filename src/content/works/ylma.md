@@ -1,10 +1,13 @@
 ---
 layout: project
-title: '"YLMA" music video'
+title: 'You Love My Arrogance'
 date: 2025-12-18
-description: "Video production for the song 'YLMA' by Vishay Khxl."
+description: "Exploring the frustration towards social expectations."
 thumbnail: /assets/images/portfolio/video/music_video_unfair.jpg
 category: Video Production
+type: Music video
+role: Video producer
+with: Vishay Khxl
 ---
 
 <https://www.youtube.com/watch?v=fJiCSoap1Vg>

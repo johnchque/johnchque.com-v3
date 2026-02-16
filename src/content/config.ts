@@ -91,6 +91,9 @@ const worksCollection = defineCollection({
     //   .transform((val) => new Date(val))
     //   .optional(),
     description: z.string().optional(),
+    type: z.string().optional(),
+    role: z.string().optional(),
+    with: z.string().optional(),
     // tags: z.array(z.string()).optional(),
   }),
 });

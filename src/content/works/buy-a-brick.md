@@ -1,12 +1,14 @@
 ---
 layout: project
-title: '"Buy a Brick" donation campaign'
+title: 'Buy a Brick'
 date: 2023-11-01
 updated: 2023-12-08
-description: "Video production for Station, the student and innovation house."
+description: "Fundraising campaign video to support Station."
 thumbnail: /assets/images/portfolio/cover_video_campaigns.jpg
 category: Video Production
-type: Project
+type: Campaign
+role: Video producer
+with: Station
 ---
 
 Ever since I arrived to Copenhagen I spent endless hours at Station. Station, the student and innovation house is a former police station that was renovated to create a space where students can connect with each other and create a positive impact in society.
@@ -17,16 +19,16 @@ My contribution to the donation campaign was focused on producing 6 videos with 
 
 Here you can see all the videos I made.
 
-https://www.youtube.com/watch?v=EeVhzFmeVLw
+<https://www.youtube.com/watch?v=EeVhzFmeVLw>
 
-https://www.youtube.com/watch?v=iX72gVoROoI
+<https://www.youtube.com/watch?v=iX72gVoROoI>
 
-https://www.youtube.com/watch?v=pROiY85wtiA
+<https://www.youtube.com/watch?v=pROiY85wtiA>
 
-https://www.youtube.com/watch?v=67cZNNwnn0Q
+<https://www.youtube.com/watch?v=67cZNNwnn0Q>
 
-https://www.youtube.com/watch?v=uoWoMVA-4FY
+<https://www.youtube.com/watch?v=uoWoMVA-4FY>
 
-https://www.youtube.com/watch?v=7EhUBuzNxiA
+<https://www.youtube.com/watch?v=7EhUBuzNxiA>
 
-https://www.youtube.com/watch?v=kjlAS95qX9M
+<https://www.youtube.com/watch?v=kjlAS95qX9M>
