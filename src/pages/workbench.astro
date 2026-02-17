@@ -89,9 +89,6 @@ function formatDate(date: Date): string {
                       <div class="col">
                         <a href={`/${note.id}`}>{note.data.title}</a>
                       </div>
-                      <div class="col-auto text-end text-muted">
-                        {formatDate(noteDate)}
-                      </div>
                       <p class="mb-0">{note.data.description}</p>
                       <p class="small fst-italic text-muted">
                         {note.data.type} • {note.data.role} • with{" "}

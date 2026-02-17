@@ -3,1437 +3,1408 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Aeterna - Enterprise AI Infrastructure for Europe</title>
-        <meta
-            name="description"
-            content="Give your team AI everywhere. Keep sensitive data private. Deploy in days, not months. GDPR-compliant by design."
-        />
-
-        <!-- Google Fonts -->
+        <title>Æterna — Knowledge Search for European Teams</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Junicode:wght@400;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
             rel="stylesheet"
         />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
-
         <style>
-            * {
+            *,
+            *::before,
+            *::after {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
             }
 
+            :root {
+                --bg: #000;
+                --fg: #ededed;
+                --fg-muted: #888;
+                --fg-faint: #444;
+                --border: #1a1a1a;
+                --border-mid: #2e2e2e;
+                --surface: #0a0a0a;
+                --surface-mid: #111;
+                --accent: #fff;
+                --blue: #3291ff;
+                --blue-dim: rgba(50, 145, 255, 0.15);
+                --radius: 8px;
+                --mono: "Geist Mono", "Menlo", monospace;
+                --sans: "DM Sans", -apple-system, sans-serif;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
             body {
-                font-family:
-                    "Geist",
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    sans-serif;
+                font-family: var(--sans);
+                background: var(--bg);
+                color: var(--fg);
                 line-height: 1.6;
-                color: #ededed;
-                background: #000000;
                 -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
+                overflow-x: hidden;
             }
 
-            /* Typography */
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                font-family: "Junicode", Georgia, serif;
-                font-weight: 400;
-                letter-spacing: -0.02em;
+            /* ─── GRID BACKGROUND ─── */
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background-image:
+                    linear-gradient(var(--border) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+                background-size: 64px 64px;
+                mask-image: radial-gradient(
+                    ellipse 80% 60% at 50% 0%,
+                    black 30%,
+                    transparent 80%
+                );
+                z-index: 0;
+                pointer-events: none;
             }
 
-            .container {
+            /* ─── NAVBAR ─── */
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                border-bottom: 1px solid var(--border);
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(16px) saturate(180%);
+                height: 56px;
+                display: flex;
+                align-items: center;
+            }
+
+            .nav-inner {
                 max-width: 1200px;
                 margin: 0 auto;
                 padding: 0 24px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
             }
 
-            /* Header */
-            header {
-                padding: 20px 0;
-                border-bottom: 1px solid #1a1a1a;
-                position: sticky;
+            .nav-left {
+                display: flex;
+                align-items: center;
+                gap: 32px;
+            }
+
+            .logo {
+                font-family: var(--mono);
+                font-size: 15px;
+                font-weight: 500;
+                color: var(--fg);
+                letter-spacing: -0.01em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .logo-mark {
+                width: 22px;
+                height: 22px;
+                background: var(--fg);
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .logo-mark svg {
+                width: 14px;
+                height: 14px;
+                fill: var(--bg);
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 0;
+                align-items: center;
+            }
+
+            .nav-links a {
+                color: var(--fg-muted);
+                text-decoration: none;
+                font-size: 14px;
+                padding: 4px 12px;
+                border-radius: 6px;
+                transition:
+                    color 0.15s,
+                    background 0.15s;
+            }
+
+            .nav-links a:hover {
+                color: var(--fg);
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .nav-right {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
+
+            .btn {
+                font-family: var(--sans);
+                font-size: 13px;
+                font-weight: 500;
+                padding: 6px 14px;
+                border-radius: 6px;
+                text-decoration: none;
+                cursor: pointer;
+                transition: all 0.15s;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                letter-spacing: -0.01em;
+                border: none;
+            }
+
+            .btn-ghost {
+                color: var(--fg-muted);
+                background: transparent;
+            }
+            .btn-ghost:hover {
+                color: var(--fg);
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .btn-outline {
+                color: var(--fg);
+                background: transparent;
+                border: 1px solid var(--border-mid);
+            }
+            .btn-outline:hover {
+                border-color: #555;
+                background: rgba(255, 255, 255, 0.03);
+            }
+
+            .btn-primary {
+                color: var(--bg);
+                background: var(--fg);
+            }
+            .btn-primary:hover {
+                background: #e0e0e0;
+            }
+
+            /* ─── HERO ─── */
+            .hero {
+                position: relative;
+                z-index: 1;
+                padding: 160px 24px 120px;
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            /* Radial glow */
+            .hero::after {
+                content: "";
+                position: absolute;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 700px;
+                height: 400px;
+                background: radial-gradient(
+                    ellipse,
+                    rgba(50, 145, 255, 0.12) 0%,
+                    transparent 65%
+                );
+                pointer-events: none;
+                z-index: -1;
+            }
+
+            .hero-badge {
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: 0.06em;
+                color: var(--fg-muted);
+                border: 1px solid var(--border-mid);
+                border-radius: 999px;
+                padding: 5px 14px;
+                margin-bottom: 32px;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(255, 255, 255, 0.02);
+                animation: fadeUp 0.5s ease both 0.1s;
+            }
+
+            .badge-dot {
+                width: 6px;
+                height: 6px;
+                background: var(--blue);
+                border-radius: 50%;
+                box-shadow: 0 0 8px var(--blue);
+                animation: pulse 2s ease infinite;
+            }
+
+            @keyframes pulse {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.4;
+                }
+            }
+
+            .hero h1 {
+                font-family: var(--sans);
+                font-size: clamp(40px, 6vw, 76px);
+                font-weight: 300;
+                line-height: 1.05;
+                letter-spacing: -0.04em;
+                margin-bottom: 24px;
+                animation: fadeUp 0.5s ease both 0.2s;
+                color: var(--fg);
+            }
+
+            .hero h1 em {
+                font-style: normal;
+                color: var(--fg-muted);
+            }
+
+            .hero-sub {
+                font-size: 17px;
+                color: var(--fg-muted);
+                font-weight: 300;
+                max-width: 560px;
+                line-height: 1.65;
+                margin-bottom: 40px;
+                animation: fadeUp 0.5s ease both 0.3s;
+                letter-spacing: -0.01em;
+            }
+
+            .hero-actions {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                animation: fadeUp 0.5s ease both 0.4s;
+            }
+
+            .hero-actions .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .hero-actions .btn-primary {
+                box-shadow:
+                    0 0 0 1px rgba(255, 255, 255, 0.15),
+                    0 4px 24px rgba(255, 255, 255, 0.06);
+            }
+
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(16px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* ─── METRICS STRIP ─── */
+            .metrics {
+                position: relative;
+                z-index: 1;
+                border-top: 1px solid var(--border);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .metrics-inner {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 24px;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .metric {
+                padding: 40px 32px;
+                border-right: 1px solid var(--border);
+                transition: background 0.2s;
+            }
+
+            .metric:last-child {
+                border-right: none;
+            }
+            .metric:hover {
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .metric-val {
+                font-family: var(--mono);
+                font-size: 28px;
+                font-weight: 400;
+                color: var(--fg);
+                letter-spacing: -0.03em;
+                margin-bottom: 6px;
+            }
+
+            .metric-val span {
+                color: var(--blue);
+            }
+
+            .metric-label {
+                font-size: 13px;
+                color: var(--fg-muted);
+                letter-spacing: -0.01em;
+            }
+
+            /* ─── SECTION COMMON ─── */
+            section {
+                position: relative;
+                z-index: 1;
+            }
+
+            .section-wrap {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 120px 24px;
+            }
+
+            .section-eyebrow {
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: 0.08em;
+                color: var(--fg-faint);
+                text-transform: uppercase;
+                margin-bottom: 16px;
+            }
+
+            .section-title {
+                font-size: clamp(28px, 4vw, 48px);
+                font-weight: 300;
+                letter-spacing: -0.035em;
+                line-height: 1.1;
+                margin-bottom: 16px;
+            }
+
+            .section-body {
+                font-size: 16px;
+                color: var(--fg-muted);
+                font-weight: 300;
+                line-height: 1.7;
+                max-width: 560px;
+                letter-spacing: -0.01em;
+            }
+
+            /* ─── FEATURE GRID ─── */
+            .feature-header {
+                max-width: 640px;
+                margin-bottom: 64px;
+            }
+
+            .features {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+
+            .feat {
+                padding: 40px;
+                border-bottom: 1px solid var(--border);
+                border-right: 1px solid var(--border);
+                transition: background 0.2s;
+                position: relative;
+            }
+
+            .feat:nth-child(2n) {
+                border-right: none;
+            }
+            .feat:nth-child(3),
+            .feat:nth-child(4) {
+                border-bottom: none;
+            }
+            .feat:hover {
+                background: rgba(255, 255, 255, 0.015);
+            }
+
+            .feat::before {
+                content: "";
+                position: absolute;
                 top: 0;
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(12px);
-                z-index: 100;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--blue),
+                    transparent
+                );
+                opacity: 0;
+                transition: opacity 0.3s;
             }
 
-            nav {
+            .feat:hover::before {
+                opacity: 1;
+            }
+
+            .feat-icon {
+                width: 36px;
+                height: 36px;
+                border: 1px solid var(--border-mid);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+                background: var(--surface-mid);
+            }
+
+            .feat-icon svg {
+                width: 16px;
+                height: 16px;
+                stroke: var(--fg-muted);
+            }
+
+            .feat h3 {
+                font-family: var(--sans);
+                font-size: 15px;
+                font-weight: 500;
+                letter-spacing: -0.02em;
+                margin-bottom: 10px;
+                color: var(--fg);
+            }
+
+            .feat p {
+                font-size: 14px;
+                color: var(--fg-muted);
+                line-height: 1.65;
+                font-weight: 300;
+            }
+
+            .feat-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                margin-top: 16px;
+                font-size: 13px;
+                color: var(--blue);
+                text-decoration: none;
+                font-family: var(--mono);
+                letter-spacing: -0.01em;
+                transition: gap 0.2s;
+            }
+
+            .feat-link:hover {
+                gap: 10px;
+            }
+
+            /* ─── COMPARISON ─── */
+            .compare-header {
+                margin-bottom: 48px;
+            }
+
+            .compare-table {
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+
+            .compare-row {
+                display: grid;
+                grid-template-columns: 2fr 1.5fr 1.5fr 1.5fr;
+                border-bottom: 1px solid var(--border);
+                transition: background 0.15s;
+            }
+
+            .compare-row:last-child {
+                border-bottom: none;
+            }
+            .compare-row:not(.compare-head):hover {
+                background: rgba(255, 255, 255, 0.015);
+            }
+
+            .compare-head {
+                background: var(--surface-mid);
+            }
+
+            .compare-cell {
+                padding: 18px 24px;
+                font-size: 13px;
+                color: var(--fg-muted);
+                border-right: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+            }
+
+            .compare-cell:last-child {
+                border-right: none;
+            }
+
+            .compare-head .compare-cell {
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: 0.04em;
+                color: var(--fg-faint);
+                padding: 14px 24px;
+            }
+
+            .compare-head .compare-cell:first-child {
+                color: var(--fg-muted);
+                font-size: 12px;
+            }
+
+            .compare-cell.aeterna {
+                color: var(--fg);
+                font-weight: 500;
+            }
+
+            .yes {
+                color: #22c55e;
+                font-family: var(--mono);
+                font-size: 12px;
+            }
+            .no {
+                color: var(--fg-faint);
+                font-family: var(--mono);
+                font-size: 12px;
+            }
+            .partial {
+                color: #f59e0b;
+                font-family: var(--mono);
+                font-size: 12px;
+            }
+
+            /* ─── COMPLIANCE BANNER ─── */
+            .compliance-wrap {
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                background: var(--surface);
+                overflow: hidden;
+                position: relative;
+            }
+
+            .compliance-bg {
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(
+                        ellipse 60% 60% at 80% 50%,
+                        rgba(50, 145, 255, 0.08) 0%,
+                        transparent 60%
+                    ),
+                    linear-gradient(
+                        90deg,
+                        transparent 40%,
+                        rgba(50, 145, 255, 0.04) 100%
+                    );
+                pointer-events: none;
+            }
+
+            .compliance-inner {
+                position: relative;
+                z-index: 1;
+                padding: 64px 56px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 48px;
+                align-items: center;
+            }
+
+            .compliance-tag {
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: 0.08em;
+                color: var(--blue);
+                background: var(--blue-dim);
+                border: 1px solid rgba(50, 145, 255, 0.25);
+                padding: 4px 12px;
+                border-radius: 999px;
+                display: inline-block;
+                margin-bottom: 20px;
+            }
+
+            .compliance-title {
+                font-size: clamp(24px, 3vw, 38px);
+                font-weight: 300;
+                letter-spacing: -0.035em;
+                line-height: 1.15;
+                margin-bottom: 16px;
+            }
+
+            .compliance-body {
+                font-size: 15px;
+                color: var(--fg-muted);
+                font-weight: 300;
+                line-height: 1.65;
+            }
+
+            .compliance-list {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .compliance-list li {
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                font-size: 14px;
+                color: var(--fg-muted);
+            }
+
+            .compliance-list li::before {
+                content: "✓";
+                color: var(--blue);
+                font-family: var(--mono);
+                font-size: 12px;
+                margin-top: 2px;
+                flex-shrink: 0;
+            }
+
+            /* ─── QUOTE ─── */
+            .quote-section {
+                border-top: 1px solid var(--border);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .quote-inner {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 80px 24px;
+                display: flex;
+                gap: 48px;
+                align-items: flex-start;
+            }
+
+            .quote-mark {
+                font-family: var(--mono);
+                font-size: 48px;
+                color: var(--fg-faint);
+                line-height: 1;
+                flex-shrink: 0;
+                margin-top: -8px;
+            }
+
+            .quote-text {
+                font-size: clamp(18px, 2.5vw, 26px);
+                font-weight: 300;
+                letter-spacing: -0.025em;
+                line-height: 1.45;
+                color: var(--fg);
+                margin-bottom: 20px;
+            }
+
+            .quote-attribution {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .quote-avatar {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #333, #555);
+                border: 1px solid var(--border-mid);
+            }
+
+            .quote-name {
+                font-size: 13px;
+                color: var(--fg-muted);
+                font-family: var(--mono);
+            }
+
+            /* ─── FOOTER ─── */
+            footer {
+                position: relative;
+                z-index: 1;
+                border-top: 1px solid var(--border);
+            }
+
+            .footer-main {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 56px 24px 40px;
+                display: grid;
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                gap: 40px;
+            }
+
+            .footer-logo {
+                font-family: var(--mono);
+                font-size: 14px;
+                color: var(--fg);
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .footer-desc {
+                font-size: 13px;
+                color: var(--fg-faint);
+                line-height: 1.6;
+                max-width: 220px;
+            }
+
+            .footer-col h4 {
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: 0.06em;
+                color: var(--fg-faint);
+                text-transform: uppercase;
+                margin-bottom: 16px;
+            }
+
+            .footer-col ul {
+                list-style: none;
+            }
+            .footer-col ul li {
+                margin-bottom: 10px;
+            }
+
+            .footer-col ul a {
+                font-size: 13px;
+                color: var(--fg-muted);
+                text-decoration: none;
+                transition: color 0.15s;
+                letter-spacing: -0.01em;
+            }
+
+            .footer-col ul a:hover {
+                color: var(--fg);
+            }
+
+            .footer-bottom {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px 24px;
+                border-top: 1px solid var(--border);
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
             }
 
-            .logo {
-                font-size: 24px;
-                font-weight: 400;
-                font-family: "Junicode", serif;
-                color: #ffffff;
+            .footer-bottom-left {
+                font-family: var(--mono);
+                font-size: 12px;
+                color: var(--fg-faint);
+            }
+
+            .footer-bottom-right {
+                display: flex;
+                gap: 24px;
+            }
+
+            .footer-bottom-right a {
+                font-size: 12px;
+                color: var(--fg-faint);
                 text-decoration: none;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                letter-spacing: 0.02em;
+                transition: color 0.15s;
             }
 
-            .logo-icon {
-                width: 32px;
-                height: 32px;
-                background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-                border-radius: 6px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: white;
-                font-weight: 600;
-                font-size: 18px;
-                font-family: "Junicode", serif;
+            .footer-bottom-right a:hover {
+                color: var(--fg-muted);
             }
 
-            .nav-links {
-                display: flex;
-                gap: 32px;
-                align-items: center;
-            }
-
-            .nav-links a {
-                color: #888;
-                text-decoration: none;
-                font-size: 14px;
-                font-weight: 500;
-                transition: color 0.2s;
-            }
-
-            .nav-links a:hover {
-                color: #ffffff;
-            }
-
-            .mobile-menu-button {
-                display: none;
-                background: transparent;
-                border: 1px solid #333;
-                color: #ffffff;
-                padding: 8px 12px;
-                border-radius: 6px;
-                font-size: 18px;
-                cursor: pointer;
-                transition: all 0.2s;
-            }
-
-            .mobile-menu-button:hover {
-                background: #111;
-                border-color: #444;
-            }
-
-            .cta-button {
-                background: #ffffff;
-                color: #000000;
-                padding: 10px 20px;
-                border-radius: 6px;
-                text-decoration: none;
-                font-weight: 600;
-                font-size: 14px;
-                transition: all 0.2s;
-                border: 1px solid #ffffff;
-                display: inline-block;
-            }
-
-            .cta-button:hover {
-                background: #ededed;
-                transform: translateY(-1px);
-            }
-
-            .cta-button-secondary {
-                background: transparent;
-                color: #ffffff;
-                border: 1px solid #333;
-            }
-
-            .cta-button-secondary:hover {
-                background: #111;
-                border-color: #444;
-            }
-
-            /* Hero Section */
-            .hero {
-                padding: 140px 0 100px;
-                text-align: center;
-                position: relative;
-            }
-
-            .hero::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 600px;
-                height: 600px;
-                background: radial-gradient(
-                    circle,
-                    rgba(59, 130, 246, 0.15) 0%,
-                    transparent 70%
-                );
-                pointer-events: none;
-                z-index: 0;
-            }
-
-            .hero > .container {
-                position: relative;
-                z-index: 1;
-            }
-
-            .hero h1 {
-                font-size: 72px;
-                font-weight: 400;
-                line-height: 1.1;
-                margin-bottom: 24px;
-                color: #ffffff;
-                letter-spacing: -0.03em;
-            }
-
-            .hero .subtitle {
-                font-size: 24px;
-                color: #888;
-                margin-bottom: 16px;
-                font-weight: 400;
-            }
-
-            .hero .description {
-                font-size: 16px;
-                color: #666;
-                max-width: 700px;
-                margin: 0 auto 40px;
-                font-weight: 400;
-                line-height: 1.7;
-            }
-
-            .badges {
-                display: flex;
-                gap: 12px;
-                justify-content: center;
-                margin-bottom: 40px;
-                flex-wrap: wrap;
-            }
-
-            .badge {
-                background: #0a0a0a;
-                color: #888;
-                padding: 6px 14px;
-                border-radius: 20px;
-                font-size: 13px;
-                font-weight: 500;
+            /* ─── STATUS INDICATOR ─── */
+            .status-pill {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
-                border: 1px solid #1a1a1a;
+                font-family: var(--mono);
+                font-size: 11px;
+                color: #22c55e;
+                border: 1px solid rgba(34, 197, 94, 0.2);
+                background: rgba(34, 197, 94, 0.06);
+                padding: 4px 10px;
+                border-radius: 999px;
             }
 
-            .cta-group {
-                display: flex;
-                gap: 12px;
-                justify-content: center;
-                margin-bottom: 32px;
-                flex-wrap: wrap;
-            }
-
-            .platform-badges {
-                display: flex;
-                gap: 16px;
-                justify-content: center;
-                color: #666;
-                font-size: 13px;
-                font-weight: 500;
-                flex-wrap: wrap;
-            }
-
-            /* Demo Video Section */
-            .demo-section {
-                padding: 40px 0 100px;
-            }
-
-            .demo-video {
-                max-width: 1000px;
-                margin: 0 auto;
-                border-radius: 12px;
-                overflow: hidden;
-                background: #0a0a0a;
-                aspect-ratio: 16/9;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-                border: 1px solid #1a1a1a;
-            }
-
-            .demo-placeholder {
-                color: #666;
-                font-size: 16px;
-                text-align: center;
-                font-weight: 500;
-                padding: 20px;
-            }
-
-            /* Features Section */
-            .features {
-                padding: 100px 0;
-                border-top: 1px solid #1a1a1a;
-            }
-
-            .section-header {
-                text-align: center;
-                margin-bottom: 80px;
-            }
-
-            .section-header h2 {
-                font-size: 48px;
-                font-weight: 400;
-                margin-bottom: 16px;
-                color: #ffffff;
-                letter-spacing: -0.02em;
-            }
-
-            .section-header p {
-                font-size: 16px;
-                color: #666;
-                max-width: 600px;
-                margin: 0 auto;
-                font-weight: 400;
-            }
-
-            .features-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-                gap: 1px;
-                background: #1a1a1a;
-                border: 1px solid #1a1a1a;
-                border-radius: 12px;
-                overflow: hidden;
-            }
-
-            .feature-card {
-                background: #000000;
-                padding: 40px;
-                transition: all 0.3s;
-            }
-
-            .feature-card:hover {
-                background: #0a0a0a;
-            }
-
-            .feature-icon {
-                font-size: 32px;
-                margin-bottom: 20px;
-            }
-
-            .feature-card h3 {
-                font-size: 20px;
-                margin-bottom: 12px;
-                font-weight: 600;
-                color: #ffffff;
-                font-family: "Geist", sans-serif;
-            }
-
-            .feature-card p {
-                color: #888;
-                font-size: 14px;
-                line-height: 1.7;
-                font-weight: 400;
-            }
-
-            /* Use Cases Section */
-            .use-cases {
-                padding: 100px 0;
-                border-top: 1px solid #1a1a1a;
-            }
-
-            .use-cases-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 24px;
-            }
-
-            .use-case {
-                padding: 32px;
-                background: #0a0a0a;
-                border: 1px solid #1a1a1a;
-                border-radius: 12px;
-                transition: all 0.3s;
-            }
-
-            .use-case:hover {
-                border-color: #333;
-                background: #0f0f0f;
-                transform: translateY(-2px);
-            }
-
-            .use-case-icon {
-                font-size: 32px;
-                margin-bottom: 16px;
-            }
-
-            .use-case h3 {
-                font-size: 18px;
-                margin-bottom: 8px;
-                font-weight: 600;
-                color: #ffffff;
-                font-family: "Geist", sans-serif;
-            }
-
-            .use-case p {
-                color: #888;
-                font-size: 13px;
-                line-height: 1.6;
-                font-weight: 400;
-            }
-
-            /* How It Works */
-            .how-it-works {
-                padding: 100px 0;
-                border-top: 1px solid #1a1a1a;
-            }
-
-            .steps {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 48px;
-                margin-top: 80px;
-            }
-
-            .step {
-                text-align: center;
-                position: relative;
-            }
-
-            .step-number {
-                width: 56px;
-                height: 56px;
-                background: #0a0a0a;
-                color: #ffffff;
+            .status-dot {
+                width: 5px;
+                height: 5px;
+                background: #22c55e;
                 border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 24px;
-                font-weight: 400;
-                margin: 0 auto 24px;
-                font-family: "Junicode", serif;
-                border: 1px solid #1a1a1a;
+                animation: pulse 2s infinite;
             }
 
-            .step h3 {
-                font-size: 20px;
-                margin-bottom: 12px;
-                color: #ffffff;
-                font-weight: 600;
-                font-family: "Geist", sans-serif;
-            }
-
-            .step p {
-                color: #888;
-                font-size: 14px;
-                line-height: 1.7;
-                font-weight: 400;
-            }
-
-            /* Comparison Section */
-            .comparison {
-                padding: 100px 0;
-                border-top: 1px solid #1a1a1a;
-            }
-
-            .comparison-table {
-                max-width: 1000px;
-                margin: 0 auto;
-                background: #0a0a0a;
-                border-radius: 12px;
-                overflow-x: auto;
-                border: 1px solid #1a1a1a;
-            }
-
-            .comparison-table table {
-                width: 100%;
-                border-collapse: collapse;
-                min-width: 600px;
-            }
-
-            .comparison-table th {
-                background: #000000;
-                color: #ffffff;
-                padding: 20px;
-                text-align: left;
-                font-weight: 600;
-                font-family: "Geist", sans-serif;
-                font-size: 13px;
-                border-bottom: 1px solid #1a1a1a;
-            }
-
-            .comparison-table td {
-                padding: 20px;
-                font-weight: 500;
-                font-size: 13px;
-                border-bottom: 1px solid #1a1a1a;
-                color: #888;
-            }
-
-            .comparison-table tr:last-child td {
-                border-bottom: none;
-            }
-
-            .comparison-table td:first-child {
-                color: #ededed;
-                font-weight: 600;
-            }
-
-            .check {
-                color: #10b981;
-                font-size: 18px;
-                font-weight: 700;
-            }
-
-            .cross {
-                color: #ef4444;
-                font-size: 18px;
-                font-weight: 700;
-            }
-
-            /* Social Proof */
-            .social-proof {
-                padding: 100px 0;
-                border-top: 1px solid #1a1a1a;
-            }
-
-            .testimonials {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 24px;
-                margin-top: 60px;
-            }
-
-            .testimonial {
-                background: #0a0a0a;
-                padding: 32px;
-                border-radius: 12px;
-                border: 1px solid #1a1a1a;
-                transition: all 0.3s;
-            }
-
-            .testimonial:hover {
-                border-color: #333;
-                background: #0f0f0f;
-            }
-
-            .testimonial-text {
-                font-size: 15px;
-                line-height: 1.7;
-                color: #888;
-                margin-bottom: 24px;
-                font-style: italic;
-                font-weight: 400;
-            }
-
-            .testimonial-author {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
-
-            .author-avatar {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: white;
-                font-weight: 600;
-                font-size: 14px;
-            }
-
-            .author-info h4 {
-                font-size: 14px;
-                font-weight: 600;
-                margin-bottom: 2px;
-                font-family: "Geist", sans-serif;
-                color: #ededed;
-            }
-
-            .author-info p {
-                font-size: 12px;
-                color: #666;
-                font-weight: 400;
-            }
-
-            /* CTA Section */
-            .final-cta {
-                padding: 140px 0;
-                text-align: center;
-                border-top: 1px solid #1a1a1a;
-                position: relative;
-            }
-
-            .final-cta::before {
-                content: "";
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 800px;
-                height: 400px;
-                background: radial-gradient(
-                    circle,
-                    rgba(59, 130, 246, 0.1) 0%,
-                    transparent 70%
-                );
-                pointer-events: none;
-                z-index: 0;
-            }
-
-            .final-cta > .container {
-                position: relative;
-                z-index: 1;
-            }
-
-            .final-cta h2 {
-                font-size: 56px;
-                font-weight: 400;
-                margin-bottom: 24px;
-                color: #ffffff;
-                letter-spacing: -0.02em;
-            }
-
-            .final-cta p {
-                font-size: 18px;
-                margin-bottom: 40px;
-                color: #888;
-                font-weight: 400;
-            }
-
-            .final-cta .cta-button {
-                font-size: 16px;
-                padding: 14px 28px;
-            }
-
-            /* Footer */
-            footer {
-                padding: 80px 0 40px;
-                border-top: 1px solid #1a1a1a;
-            }
-
-            .footer-content {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 48px;
-                margin-bottom: 60px;
-            }
-
-            .footer-section h3 {
-                color: #ededed;
-                font-size: 14px;
-                margin-bottom: 16px;
-                font-weight: 600;
-                font-family: "Geist", sans-serif;
-            }
-
-            .footer-section a {
-                color: #666;
-                text-decoration: none;
-                display: block;
-                margin-bottom: 8px;
-                font-size: 13px;
-                font-weight: 400;
-                transition: color 0.2s;
-            }
-
-            .footer-section a:hover {
-                color: #ededed;
-            }
-
-            .footer-bottom {
-                text-align: center;
-                padding-top: 40px;
-                border-top: 1px solid #1a1a1a;
-                font-size: 13px;
-                font-weight: 400;
-                color: #666;
-            }
-
-            /* Responsive Styles */
-
-            /* Tablet styles (768px - 1024px) */
-            @media (max-width: 1024px) {
-                .container {
-                    padding: 0 20px;
-                }
-
-                .hero h1 {
-                    font-size: 56px;
-                }
-
-                .hero .subtitle {
-                    font-size: 22px;
-                }
-
-                .section-header h2 {
-                    font-size: 40px;
-                }
-
-                .final-cta h2 {
-                    font-size: 48px;
-                }
-
-                .features-grid {
+            /* ─── RESPONSIVE ─── */
+            @media (max-width: 900px) {
+                .metrics-inner {
                     grid-template-columns: repeat(2, 1fr);
                 }
-
-                .steps {
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 40px;
+                .metric:nth-child(2) {
+                    border-right: none;
                 }
-            }
-
-            /* Mobile styles (481px - 768px) */
-            @media (max-width: 768px) {
-                .container {
-                    padding: 0 16px;
+                .metric:nth-child(3) {
+                    border-right: 1px solid var(--border);
                 }
-
-                /* Header/Navigation */
-                .nav-links {
+                .metric:nth-child(3),
+                .metric:nth-child(4) {
+                    border-top: 1px solid var(--border);
+                }
+                .features {
+                    grid-template-columns: 1fr;
+                }
+                .feat:nth-child(2n) {
+                    border-right: 1px solid var(--border);
+                }
+                .feat:nth-child(3) {
+                    border-bottom: 1px solid var(--border);
+                }
+                .feat:nth-child(4) {
+                    border-bottom: none;
+                }
+                .feat {
+                    border-right: none !important;
+                }
+                .compare-row {
+                    grid-template-columns: 1fr 1fr;
+                }
+                .compare-cell:nth-child(3),
+                .compare-cell:nth-child(4) {
                     display: none;
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    right: 0;
-                    background: rgba(0, 0, 0, 0.95);
-                    backdrop-filter: blur(12px);
+                }
+                .compliance-inner {
+                    grid-template-columns: 1fr;
+                    padding: 40px 32px;
+                }
+                .footer-main {
+                    grid-template-columns: 1fr 1fr;
+                }
+                .quote-inner {
                     flex-direction: column;
-                    padding: 20px;
-                    gap: 16px;
-                    border-top: 1px solid #1a1a1a;
-                }
-
-                .nav-links.active {
-                    display: flex;
-                }
-
-                .nav-links a {
-                    font-size: 16px;
-                    padding: 8px 0;
-                }
-
-                .mobile-menu-button {
-                    display: block;
-                }
-
-                /* Hero Section */
-                .hero {
-                    padding: 100px 0 60px;
-                }
-
-                .hero::before {
-                    width: 400px;
-                    height: 400px;
-                }
-
-                .hero h1 {
-                    font-size: 40px;
-                    margin-bottom: 20px;
-                }
-
-                .hero .subtitle {
-                    font-size: 18px;
-                    margin-bottom: 12px;
-                }
-
-                .hero .description {
-                    font-size: 15px;
-                    margin-bottom: 32px;
-                }
-
-                .badges {
-                    gap: 8px;
-                    margin-bottom: 32px;
-                }
-
-                .badge {
-                    font-size: 12px;
-                    padding: 5px 12px;
-                }
-
-                .cta-group {
-                    flex-direction: column;
-                    gap: 10px;
-                }
-
-                .cta-group .cta-button {
-                    width: 100%;
-                    text-align: center;
-                }
-
-                .platform-badges {
-                    gap: 12px;
-                    font-size: 12px;
-                }
-
-                /* Demo Section */
-                .demo-section {
-                    padding: 20px 0 60px;
-                }
-
-                .demo-placeholder {
-                    font-size: 14px;
-                }
-
-                /* Sections */
-                .features,
-                .use-cases,
-                .how-it-works,
-                .comparison,
-                .social-proof {
-                    padding: 60px 0;
-                }
-
-                .section-header {
-                    margin-bottom: 48px;
-                }
-
-                .section-header h2 {
-                    font-size: 32px;
-                    margin-bottom: 12px;
-                }
-
-                .section-header p {
-                    font-size: 14px;
-                }
-
-                /* Features Grid */
-                .features-grid {
-                    grid-template-columns: 1fr;
-                }
-
-                .feature-card {
-                    padding: 28px;
-                }
-
-                .feature-icon {
-                    font-size: 28px;
-                    margin-bottom: 16px;
-                }
-
-                .feature-card h3 {
-                    font-size: 18px;
-                }
-
-                .feature-card p {
-                    font-size: 13px;
-                }
-
-                /* Use Cases */
-                .use-cases-grid {
-                    grid-template-columns: 1fr;
-                    gap: 16px;
-                }
-
-                .use-case {
-                    padding: 24px;
-                }
-
-                /* Steps */
-                .steps {
-                    grid-template-columns: 1fr;
-                    gap: 40px;
-                    margin-top: 48px;
-                }
-
-                .step-number {
-                    width: 48px;
-                    height: 48px;
-                    font-size: 20px;
-                    margin-bottom: 20px;
-                }
-
-                .step h3 {
-                    font-size: 18px;
-                }
-
-                .step p {
-                    font-size: 13px;
-                }
-
-                /* Comparison Table */
-                .comparison-table {
-                    border-radius: 8px;
-                }
-
-                .comparison-table th,
-                .comparison-table td {
-                    padding: 12px;
-                    font-size: 11px;
-                }
-
-                .comparison-table th:first-child,
-                .comparison-table td:first-child {
-                    position: sticky;
-                    left: 0;
-                    background: #0a0a0a;
-                    z-index: 1;
-                }
-
-                .comparison-table th:first-child {
-                    background: #000000;
-                }
-
-                /* Testimonials */
-                .testimonials {
-                    grid-template-columns: 1fr;
-                    gap: 16px;
-                    margin-top: 40px;
-                }
-
-                .testimonial {
-                    padding: 24px;
-                }
-
-                .testimonial-text {
-                    font-size: 14px;
-                    margin-bottom: 20px;
-                }
-
-                /* Final CTA */
-                .final-cta {
-                    padding: 80px 0;
-                }
-
-                .final-cta::before {
-                    width: 500px;
-                    height: 300px;
-                }
-
-                .final-cta h2 {
-                    font-size: 36px;
-                    margin-bottom: 20px;
-                }
-
-                .final-cta p {
-                    font-size: 16px;
-                    margin-bottom: 32px;
-                }
-
-                .final-cta .cta-button {
-                    font-size: 15px;
-                    padding: 12px 24px;
-                    width: 100%;
-                }
-
-                /* Footer */
-                footer {
-                    padding: 60px 0 32px;
-                }
-
-                .footer-content {
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 32px;
-                    margin-bottom: 40px;
-                }
-
-                .footer-section h3 {
-                    font-size: 13px;
-                    margin-bottom: 12px;
-                }
-
-                .footer-section a {
-                    font-size: 12px;
-                    margin-bottom: 6px;
-                }
-
-                .footer-bottom {
-                    padding-top: 32px;
-                    font-size: 12px;
-                }
-            }
-
-            /* Small mobile styles (320px - 480px) */
-            @media (max-width: 480px) {
-                .container {
-                    padding: 0 12px;
-                }
-
-                .logo {
-                    font-size: 20px;
-                }
-
-                .logo-icon {
-                    width: 28px;
-                    height: 28px;
-                    font-size: 16px;
-                }
-
-                .hero h1 {
-                    font-size: 32px;
-                }
-
-                .hero .subtitle {
-                    font-size: 16px;
-                }
-
-                .hero .description {
-                    font-size: 14px;
-                }
-
-                .section-header h2 {
-                    font-size: 28px;
-                }
-
-                .feature-card,
-                .use-case,
-                .testimonial {
-                    padding: 20px;
-                }
-
-                .final-cta h2 {
-                    font-size: 28px;
-                }
-
-                .final-cta p {
-                    font-size: 14px;
-                }
-
-                .footer-content {
-                    grid-template-columns: 1fr;
                     gap: 24px;
                 }
+            }
 
-                .comparison-table th,
-                .comparison-table td {
-                    padding: 10px 8px;
-                    font-size: 10px;
+            @media (max-width: 600px) {
+                .nav-links {
+                    display: none;
+                }
+                .hero h1 {
+                    font-size: 36px;
+                }
+                .metrics-inner {
+                    grid-template-columns: 1fr 1fr;
+                }
+                .footer-main {
+                    grid-template-columns: 1fr;
                 }
             }
         </style>
     </head>
-
     <body>
-        <!-- Header -->
-        <header>
-            <nav class="container">
-                <a href="/" class="logo">
-                    <div class="logo-icon">Æ</div>
-                    Aeterna
-                </a>
-                <button class="mobile-menu-button" onclick="toggleMobileMenu()">
-                    ☰
-                </button>
-                <div class="nav-links" id="navLinks">
-                    <a href="#features">Features</a>
-                    <a href="#how-it-works">How It Works</a>
-                    <a href="#use-cases">Use Cases</a>
-                    <a href="#" class="cta-button-secondary">Book Demo</a>
+        <!-- NAV -->
+        <nav>
+            <div class="nav-inner">
+                <div class="nav-left">
+                    <div class="logo">
+                        <div class="logo-mark">
+                            <svg viewBox="0 0 14 14"
+                                ><path d="M7 1 L13 13 L1 13 Z"></path></svg
+                            >
+                        </div>
+                        Æterna
+                    </div>
+                    <div class="nav-links">
+                        <a href="#product">Product</a>
+                        <a href="#compare">Compare</a>
+                        <a href="#compliance">Compliance</a>
+                        <a href="#">Docs</a>
+                    </div>
                 </div>
-            </nav>
-        </header>
-
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <h1>Enterprise AI.<br />Private by Default.</h1>
-                <p class="subtitle">
-                    Give your team AI everywhere. Keep sensitive data local.
-                    Deploy in days, not months.
-                </p>
-                <p class="description">
-                    Aeterna runs on every employee's computer, works in every
-                    application, and automatically keeps GDPR-sensitive data
-                    on-device. Built for European enterprises.
-                </p>
-
-                <div class="badges">
-                    <span class="badge">🔒 GDPR Compliant</span>
-                    <span class="badge">⚡ Deploy in 1 Week</span>
-                    <span class="badge">🇪🇺 EU AI Act Ready</span>
-                    <span class="badge">♻️ 45% Less Carbon</span>
-                </div>
-
-                <div class="cta-group">
-                    <a href="#demo" class="cta-button">Start Free Pilot</a>
-                    <a
-                        href="#how-it-works"
-                        class="cta-button cta-button-secondary"
-                        >See How It Works</a
-                    >
-                </div>
-
-                <div class="platform-badges">
-                    <span>🍎 macOS</span>
-                    <span>🪟 Windows</span>
-                    <span>🐧 Linux</span>
+                <div class="nav-right">
+                    <a href="#" class="btn btn-ghost">Log in</a>
+                    <a href="#" class="btn btn-outline">Talk to us</a>
+                    <a href="#" class="btn btn-primary">Request demo →</a>
                 </div>
             </div>
-        </section>
+        </nav>
 
-        <!-- Demo Video -->
-        <section class="demo-section">
-            <div class="container">
-                <div class="demo-video">
-                    <div class="demo-placeholder">
-                        <p>📹 Product Demo Video</p>
-                        <p
-                            style="font-size: 13px; margin-top: 8px; color: #555;"
-                        >
-                            Watch how Aeterna works in 90 seconds
-                        </p>
-                    </div>
-                </div>
+        <!-- HERO -->
+        <div class="hero">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                DORA · NIS2 · EU Data Act · Cloud &amp; AI Act — compliant by design
             </div>
-        </section>
+            <h1>
+                Your team's knowledge<br /><em>shouldn't live in silos.</em>
+            </h1>
+            <p class="hero-sub">
+                Æterna is a European AI platform that connects your tools,
+                surfaces answers in context, and keeps every byte of your data
+                inside the EU — with no vendor lock-in.
+            </p>
+            <div class="hero-actions">
+                <a href="#" class="btn btn-primary">Request demo →</a>
+                <a href="#" class="btn btn-outline">See how it works</a>
+            </div>
+        </div>
 
-        <!-- Features Section -->
-        <section id="features" class="features">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Everything Your Team Needs. Nothing They Don't.</h2>
-                    <p>Enterprise-grade AI infrastructure that just works.</p>
+        <!-- METRICS -->
+        <div class="metrics">
+            <div class="metrics-inner">
+                <div class="metric">
+                    <div class="metric-val"><span>2</span>hrs</div>
+                    <div class="metric-label">
+                        saved per employee daily on knowledge search
+                    </div>
                 </div>
-
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🔒</div>
-                        <h3>Private by Design</h3>
-                        <p>
-                            Sensitive data never leaves the device.
-                            GDPR-compliant automatically. Zero trust
-                            architecture with full audit trails.
-                        </p>
+                <div class="metric">
+                    <div class="metric-val"><span>660</span>%</div>
+                    <div class="metric-label">
+                        YoY rise in searches for "European alternatives"
                     </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h3>Works Everywhere</h3>
-                        <p>
-                            Gmail, Slack, Word, browser—any application. No
-                            switching contexts. Just right-click or use keyboard
-                            shortcuts.
-                        </p>
+                </div>
+                <div class="metric">
+                    <div class="metric-val">€<span>50k</span></div>
+                    <div class="metric-label">
+                        all-in for 200 users, no hidden fees
                     </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3>Smart Routing</h3>
-                        <p>
-                            Automatically classifies sensitive vs non-sensitive.
-                            Routes appropriately. Local models for privacy,
-                            cloud for speed.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">👨‍💼</div>
-                        <h3>IT Controls Everything</h3>
-                        <p>
-                            Set policies by department, role, data type. Monitor
-                            usage. Audit every query. Deploy via MDM (Intune,
-                            Jamf).
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h3>Compliance Dashboard</h3>
-                        <p>
-                            Real-time visibility into AI usage. Export reports
-                            for auditors. Track GDPR compliance. Ready for EU AI
-                            Act 2026.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">🌱</div>
-                        <h3>Sustainable AI</h3>
-                        <p>
-                            Local inference reduces carbon emissions by 45%.
-                            Track environmental impact. Transparent
-                            sustainability reporting.
-                        </p>
+                </div>
+                <div class="metric">
+                    <div class="metric-val"><span>100</span>%</div>
+                    <div class="metric-label">
+                        EU models, EU infra, EU data hosting
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Use Cases -->
-        <section id="use-cases" class="use-cases">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Built for Regulated Industries</h2>
-                    <p>Enterprises with sensitive data trust Aeterna</p>
-                </div>
-
-                <div class="use-cases-grid">
-                    <div class="use-case">
-                        <div class="use-case-icon">🏥</div>
-                        <h3>Healthcare</h3>
-                        <p>
-                            Process patient data locally. Summarize charts.
-                            Draft clinical notes. HIPAA/GDPR compliant by
-                            design.
-                        </p>
-                    </div>
-
-                    <div class="use-case">
-                        <div class="use-case-icon">⚖️</div>
-                        <h3>Legal</h3>
-                        <p>
-                            Analyze contracts. Research case law. Draft
-                            documents. Client data stays confidential on your
-                            devices.
-                        </p>
-                    </div>
-
-                    <div class="use-case">
-                        <div class="use-case-icon">🏛️</div>
-                        <h3>Government</h3>
-                        <p>
-                            Process citizen data securely. Draft communications.
-                            Analyze policy. Full data sovereignty.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- How It Works -->
-        <section id="how-it-works" class="how-it-works">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Deploy AI in One Week</h2>
-                    <p>Not six months. Not complex integrations. Just works.</p>
-                </div>
-
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <h3>IT Configures Policies</h3>
-                        <p>
-                            Define what's sensitive for your organization. Set
-                            department rules. Configure model preferences.
-                        </p>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <h3>Deploy to Employees</h3>
-                        <p>
-                            Push via MDM (Intune, Jamf). Aeterna installs
-                            silently. Runs in background. Zero employee training
-                            needed.
-                        </p>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <h3>Teams Use AI Everywhere</h3>
-                        <p>
-                            Right-click in any app. Use keyboard shortcuts. AI
-                            just works. Compliance is automatic.
-                        </p>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <h3>IT Monitors & Reports</h3>
-                        <p>
-                            Dashboard shows usage, compliance, savings. Export
-                            reports for auditors. Full visibility.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Comparison Table -->
-        <section class="comparison">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Why Enterprises Choose Aeterna</h2>
-                    <p>See how we compare to alternatives</p>
-                </div>
-
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Feature</th>
-                                <th>Aeterna</th>
-                                <th>ChatGPT Enterprise</th>
-                                <th>AWS Bedrock</th>
-                                <th>On-Premise LLM</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Local Data Processing</td>
-                                <td><span class="check">✓</span></td>
-                                <td><span class="cross">✗</span></td>
-                                <td><span class="cross">✗</span></td>
-                                <td><span class="check">✓</span></td>
-                            </tr>
-                            <tr>
-                                <td>Works in All Apps</td>
-                                <td><span class="check">✓</span></td>
-                                <td><span class="cross">✗</span></td>
-                                <td><span class="cross">✗</span></td>
-                                <td><span class="cross">✗</span></td>
-                            </tr>
-                            <tr>
-                                <td>Deploy in <1 Week</td>
-                                <td><span class="check">✓</span></td>
-                                <td><span class="check">✓</span></td>
-                                <td><span class="cross">✗</span></td>
-                                <td><span class="cross">✗</span></td>
-                            </tr>
-                            <tr>
-                                <td>GDPR Compliant</td>
-                                <td><span class="check">✓</span></td>
-                                <td><span class="cross">~</span></td>
-                                <td><span class="cross">~</span></td>
-                                <td><span class="check">✓</span></td>
-                            </tr>
-                            <tr>
-                                <td>EU AI Act Ready</td>
-                                <td><span class="check">✓</span></td>
-                                <td><span class="cross">✗</span></td>
-                                <td><span class="cross">✗</span></td>
-                                <td><span class="cross">~</span></td>
-                            </tr>
-                            <tr>
-                                <td>European Company</td>
-                                <td><span class="check">✓</span></td>
-                                <td><span class="cross">✗</span></td>
-                                <td><span class="cross">✗</span></td>
-                                <td><span class="cross">~</span></td>
-                            </tr>
-                            <tr>
-                                <td>Cost per User/Year</td>
-                                <td>€129</td>
-                                <td>€180+</td>
-                                <td>€200+</td>
-                                <td>€300+</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA -->
-        <section class="final-cta">
-            <div class="container">
-                <h2>Ready to Give Your Team AI?</h2>
-                <p>Reach out to know more about our platform.</p>
-                <a
-                    href="mailto:hello@aeterna.ai?subject=Pilot Program Request"
-                    class="cta-button">Get in Touch →</a
-                >
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h3>Product</h3>
-                        <a href="#features">Features</a>
-                        <a href="#use-cases">Use Cases</a>
-                        <a href="#how-it-works">How It Works</a>
-                        <a href="#">Documentation</a>
-                    </div>
-
-                    <div class="footer-section">
-                        <h3>Company</h3>
-                        <a href="#">About Us</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Careers</a>
-                        <a href="#">Contact</a>
-                    </div>
-
-                    <div class="footer-section">
-                        <h3>Resources</h3>
-                        <a href="#">GDPR Guide</a>
-                        <a href="#">EU AI Act Compliance</a>
-                        <a href="#">Case Studies</a>
-                        <a href="#">Security & Privacy</a>
-                        <a href="#">API Documentation</a>
-                    </div>
-
-                    <div class="footer-section">
-                        <h3>Legal</h3>
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
-                        <a href="#">Data Processing Agreement</a>
-                        <a href="#">Cookie Policy</a>
-                    </div>
-                </div>
-
-                <div class="footer-bottom">
-                    <p>© 2025 Aeterna. Built in Copenhagen for Europe. 🇪🇺</p>
-                    <p style="margin-top: 8px; font-size: 12px;">
-                        Making enterprise AI private, compliant, and
-                        sustainable.
+        <!-- FEATURES -->
+        <section id="product">
+            <div class="section-wrap">
+                <div class="feature-header">
+                    <div class="section-eyebrow">Product</div>
+                    <h2 class="section-title">
+                        Break down silos.<br />Share knowledge in context.
+                    </h2>
+                    <p class="section-body">
+                        One interface connects your tools, surfaces answers
+                        instantly, and lets institutional knowledge flow across
+                        teams — not get trapped inside them.
                     </p>
+                </div>
+
+                <div class="features">
+                    <div class="feat">
+                        <div class="feat-icon">
+                            <svg
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3>One search. All your tools.</h3>
+                        <p>
+                            Confluence, Slack, SharePoint, Notion, Drive, Jira —
+                            queried together in a single interface. No more
+                            switching apps, no more asking a colleague who
+                            "might know where that is."
+                        </p>
+                        <a href="#" class="feat-link">View integrations →</a>
+                    </div>
+
+                    <div class="feat">
+                        <div class="feat-icon">
+                            <svg
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3>Answers with context</h3>
+                        <p>
+                            AI-generated answers cite the exact documents they
+                            draw from — so your team gets the answer and
+                            understands why it's true. Powered by Mistral,
+                            running entirely in Paris.
+                        </p>
+                        <a href="#" class="feat-link">Watch demo →</a>
+                    </div>
+
+                    <div class="feat">
+                        <div class="feat-icon">
+                            <svg
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3>Deploy in five days</h3>
+                        <p>
+                            OAuth connections to all major tools. No
+                            professional services, no six-month projects. Your
+                            IT team goes live by next Friday.
+                        </p>
+                        <a href="#" class="feat-link">Read setup guide →</a>
+                    </div>
+
+                    <div class="feat">
+                        <div class="feat-icon">
+                            <svg
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3>EU platform. No lock-in.</h3>
+                        <p>
+                            EU company, EU models, EU infrastructure. Not
+                            subject to the CLOUD Act. No proprietary AI you're
+                            tied to — switch models as the market evolves. Your
+                            data is yours, always.
+                        </p>
+                        <a href="#" class="feat-link"
+                            >Download compliance brief →</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPARISON TABLE -->
+        <section id="compare" style="border-top: 1px solid var(--border);">
+            <div class="section-wrap">
+                <div class="compare-header">
+                    <div class="section-eyebrow">Comparison</div>
+                    <h2 class="section-title">
+                        "Sovereign cloud" is<br />marketing spin.<br />This
+                        isn't.
+                    </h2>
+                    <p class="section-body" style="margin-top: 12px;">
+                        On June 10, 2025, Microsoft France's legal director
+                        testified under oath before the French Senate that he
+                        could not guarantee EU data would be protected from US
+                        authorities — even when stored in EU data centers. Every
+                        US hyperscaler faces the same CLOUD Act reality. We
+                        don't.
+                    </p>
+                </div>
+
+                <div class="compare-table">
+                    <div class="compare-row compare-head">
+                        <div class="compare-cell">Capability</div>
+                        <div class="compare-cell">Æterna</div>
+                        <div class="compare-cell">MS Copilot</div>
+                        <div class="compare-cell">Glean</div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-cell">
+                            Cross-tool search (all vendors)
+                        </div>
+                        <div class="compare-cell aeterna">
+                            <span class="yes">✓ yes</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="no">✗ Microsoft only</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="yes">✓ yes</span>
+                        </div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-cell">
+                            EU company &amp; jurisdiction
+                        </div>
+                        <div class="compare-cell aeterna">
+                            <span class="yes">✓ yes</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="no">✗ US CLOUD Act</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="no">✗ US CLOUD Act</span>
+                        </div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-cell">Data stays in Frankfurt</div>
+                        <div class="compare-cell aeterna">
+                            <span class="yes">✓ guaranteed</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="partial">~ not guaranteed</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="partial">~ configurable</span>
+                        </div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-cell">Price (200 users / year)</div>
+                        <div class="compare-cell aeterna">
+                            <span
+                                style="color: var(--fg); font-family: var(--mono); font-size: 12px;"
+                                >€50,000</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span
+                                style="color: var(--fg-muted); font-family: var(--mono); font-size: 12px;"
+                                >$72,000+</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span
+                                style="color: var(--fg-muted); font-family: var(--mono); font-size: 12px;"
+                                >$66,000+</span>
+                        </div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-cell">Time to go live</div>
+                        <div class="compare-cell aeterna">
+                            <span
+                                style="color: var(--fg); font-family: var(--mono); font-size: 12px;"
+                                >5 days</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span
+                                style="color: var(--fg-muted); font-family: var(--mono); font-size: 12px;"
+                                >2–4 weeks</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span
+                                style="color: var(--fg-muted); font-family: var(--mono); font-size: 12px;"
+                                >3–6 months</span>
+                        </div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-cell">No AI vendor lock-in</div>
+                        <div class="compare-cell aeterna">
+                            <span class="yes">✓ open by design</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="no">✗ Azure / OpenAI only</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="no">✗ proprietary stack</span>
+                        </div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-cell">
+                            DORA compliance documentation
+                        </div>
+                        <div class="compare-cell aeterna">
+                            <span class="yes">✓ one-click PDF</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="partial">~ manual process</span>
+                        </div>
+                        <div class="compare-cell">
+                            <span class="no">✗ not provided</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPLIANCE -->
+        <section id="compliance" style="border-top: 1px solid var(--border);">
+            <div class="section-wrap">
+                <div class="compliance-wrap">
+                    <div class="compliance-bg"></div>
+                    <div class="compliance-inner">
+                        <div>
+                            <div class="compliance-tag">
+                                DORA · NIS2 · EU DATA ACT · CLOUD &amp; AI ACT
+                            </div>
+                            <h2 class="compliance-title">
+                                Four regulations.<br />One audit-ready<br
+                                />documentation pack.
+                            </h2>
+                            <p
+                                class="compliance-body"
+                                style="margin: 20px 0 28px;"
+                            >
+                                DORA (Jan 2025), NIS2 (Oct 2024), and the EU
+                                Data Act (Sep 2025) are already in force. The
+                                Cloud & AI Development Act is incoming. All
+                                require you to prove exactly where your data is
+                                processed and who controls it. We give you that
+                                proof, instantly.
+                            </p>
+                            <div
+                                style="display: flex; gap: 10px; flex-wrap: wrap;"
+                            >
+                                <a href="#" class="btn btn-primary"
+                                    >Download compliance guide</a
+                                >
+                                <a href="#" class="btn btn-outline"
+                                    >Talk to compliance team</a
+                                >
+                            </div>
+                        </div>
+                        <ul class="compliance-list">
+                            <li>
+                                EU headquarters and incorporation — not a US
+                                subsidiary
+                            </li>
+                            <li>
+                                AI inference runs on Mistral in Paris — no US
+                                model providers
+                            </li>
+                            <li>
+                                Data stored exclusively in Frankfurt
+                                (eu-central-1)
+                            </li>
+                            <li>
+                                Not subject to US CLOUD Act or FISA §702 —
+                                legally, not just contractually
+                            </li>
+                            <li>
+                                "Sovereign cloud" labels from US hyperscalers
+                                don't change their legal jurisdiction. Ours
+                                does.
+                            </li>
+                            <li>
+                                EU Data Act compliant — full data portability,
+                                no exit fees
+                            </li>
+                            <li>
+                                GDPR-native data processing agreements included
+                            </li>
+                            <li>
+                                NIS2 &amp; DORA technical controls fully
+                                documented
+                            </li>
+                            <li>
+                                Penetration test reports available on request
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+        <div class="quote-section">
+            <div class="quote-inner">
+                <div class="quote-mark">"</div>
+                <div>
+                    <p class="quote-text">
+                        We needed enterprise search our compliance team would
+                        actually approve. Æterna was the only option that could
+                        prove EU sovereignty on day one — not just promise it.
+                    </p>
+                    <div class="quote-attribution">
+                        <div class="quote-avatar"></div>
+                        <div>
+                            <div class="quote-name">
+                                CTO, German Manufacturing Co.
+                            </div>
+                            <div
+                                style="font-size: 12px; color: var(--fg-faint); font-family: var(--mono); margin-top: 3px;"
+                            >
+                                2,500 employees · Manufacturing · DAX supplier
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-main">
+                <div>
+                    <div class="footer-logo">
+                        <div class="logo-mark" style="width:20px;height:20px;">
+                            <svg
+                                viewBox="0 0 14 14"
+                                style="width:12px;height:12px;fill:#000;"
+                                ><path d="M7 1 L13 13 L1 13 Z"></path></svg
+                            >
+                        </div>
+                        Æterna
+                    </div>
+                    <p class="footer-desc">
+                        EU knowledge platform for European teams. No lock-in. No
+                        compromises on sovereignty.
+                    </p>
+                    <div style="margin-top: 20px;">
+                        <div class="status-pill">
+                            <span class="status-dot"></span> All systems operational
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Changelog</a></li>
+                        <li><a href="#">Request demo</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Compliance</h4>
+                    <ul>
+                        <li><a href="#">DORA Guide</a></li>
+                        <li><a href="#">NIS2 Guide</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Trust Center</a></li>
+                        <li><a href="#">GDPR DPA</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    © 2026 Æterna GmbH. All rights reserved.
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
                 </div>
             </div>
         </footer>
-
-        <script>
-            function toggleMobileMenu() {
-                const navLinks = document.getElementById("navLinks");
-                if (navLinks) {
-                    navLinks.classList.toggle("active");
-                }
-            }
-
-            // Close mobile menu when clicking outside
-            document.addEventListener("click", function (event) {
-                const target = event.target;
-                const navLinks = document.getElementById("navLinks");
-                const mobileMenuButton = document.querySelector(
-                    ".mobile-menu-button",
-                );
-
-                // Check if target is a Node before using contains
-                if (navLinks && mobileMenuButton && target instanceof Node) {
-                    if (
-                        !navLinks.contains(target) &&
-                        !mobileMenuButton.contains(target) &&
-                        navLinks.classList.contains("active")
-                    ) {
-                        navLinks.classList.remove("active");
-                    }
-                }
-            });
-
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll(".nav-links a").forEach(function (link) {
-                link.addEventListener("click", function () {
-                    const navLinks = document.getElementById("navLinks");
-                    if (navLinks) {
-                        navLinks.classList.remove("active");
-                    }
-                });
-            });
-        </script>
     </body>
 </html>
