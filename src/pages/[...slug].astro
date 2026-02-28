@@ -8,8 +8,9 @@ export async function getStaticPaths() {
   const notes = await getCollection("notes");
   const worldNotes = await getCollection("world");
   const worksNotes = await getCollection("works");
+  const indexes = await getCollection("indexes");
 
-  const allNotes = [...notes, ...worldNotes, ...worksNotes];
+  const allNotes = [...notes, ...worldNotes, ...worksNotes, ...indexes];
 
   return allNotes.map((note) => ({
     params: { slug: note.id },

@@ -2,6 +2,20 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
+const indexesCollection = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/indexes" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.date().or(z.string()).transform((val) => new Date(val)).optional(),
+    updated: z
+      .date()
+      .or(z.string())
+      .transform((val) => new Date(val))
+      .optional(),
+    description: z.string().optional(),
+  }),
+});
+
 const notesCollection = defineCollection({
   loader: glob({ pattern: "*.md", base: "./src/content/notes" }),
   //   type: "content",
@@ -102,4 +116,5 @@ export const collections = {
   notes: notesCollection,
   world: worldCollection,
   works: worksCollection,
+  indexes: indexesCollection
 };

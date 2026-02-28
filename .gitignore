@@ -27,3 +27,6 @@ pnpm-debug.log*
 **/drafts/
 # Obsidian files
 **/.obsidian/
+**/_archive/
+**/_inbox/
+**/_mocs/

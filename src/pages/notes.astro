@@ -6,8 +6,9 @@ import { Icon } from "astro-icon/components";
 // Get all notes and sort by updated date (most recent first)
 const notes = await getCollection("notes");
 const worldNotes = await getCollection("world");
+const indexes = await getCollection("indexes");
 
-const allNotes = [...notes, ...worldNotes];
+const allNotes = [...notes, ...worldNotes, ...indexes];
 
 const sortedNotes = allNotes.sort((a, b) => {
   const dateA = new Date(a.data.updated || a.data.date);

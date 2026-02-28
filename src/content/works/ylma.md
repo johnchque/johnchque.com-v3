@@ -1,8 +1,8 @@
 ---
 layout: project
-title: 'You Love My Arrogance'
+title: YLMA
 date: 2025-12-18
-description: "Exploring the frustration towards social expectations."
+description: Exploring the frustration towards social expectations.
 thumbnail: /assets/images/portfolio/video/music_video_unfair.jpg
 category: Video Production
 type: Music video
