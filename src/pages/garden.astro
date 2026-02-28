@@ -8,7 +8,7 @@ const notes = await getCollection("notes");
 const worldNotes = await getCollection("world");
 const indexes = await getCollection("indexes");
 
-const allNotes = [...notes, ...worldNotes, ...indexes];
+const allNotes = [...notes, ...indexes];
 
 const sortedNotes = allNotes.sort((a, b) => {
   const dateA = new Date(a.data.updated || a.data.date);
@@ -19,7 +19,7 @@ const sortedNotes = allNotes.sort((a, b) => {
 // Group notes by year
 const notesByYear = sortedNotes.reduce(
   (acc, note) => {
-    const date = new Date(note.data.updated || note.data.date);
+    const date = new Date(note.data.last_tended || note.data.date);
     const year = date.getFullYear().toString();
 
     if (!acc[year]) {
@@ -97,7 +97,7 @@ function formatDate(date: Date): string {
                 <div class="year-heading year text-muted mb-3">{year}</div>
                 {notesByYear[year].map((note) => {
                   const noteDate = new Date(
-                    note.data.updated || note.data.date,
+                    note.data.last_tended || note.data.date,
                   );
                   return (
                     <div class="row mb-3 mb-md-0">
